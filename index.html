@@ -355,6 +355,25 @@ body.dark .cp-bm-dot{border-color:rgba(15,20,40,.9)}
 .remed-bar{display:none;align-items:center;gap:9px;padding:8px 14px;background:rgba(217,119,6,.1);border:1px solid rgba(217,119,6,.22);border-radius:var(--r-md);font-size:.78rem;font-weight:600;color:var(--amber);animation:fadeUp .3s var(--ease-out) both}
 .remed-bar.visible{display:flex}
 body.dark .remed-bar{background:rgba(217,119,6,.13);border-color:rgba(217,119,6,.3)}
+/* ── Caption bar — seamlessly connected below the checkpoint bar ── */
+.cp-bar.cap-open{border-radius:0;border-bottom-color:transparent}
+.cap-bar{background:var(--glass-bg);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-border);border-top:none;border-radius:0 0 var(--r-lg) var(--r-lg);padding:10px 18px 14px;display:none;flex-direction:column;gap:6px;box-shadow:0 4px 16px rgba(31,38,135,.04);transition:all .25s var(--ease-out)}
+.cap-bar.visible{display:flex}
+.cap-hd{display:flex;align-items:center;justify-content:space-between}
+.cap-lbl{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted)}
+.cap-cc-btn{font-size:.55rem;font-weight:800;letter-spacing:.06em;padding:2px 8px;border-radius:5px;border:1.5px solid var(--accent);background:var(--accent);color:white;cursor:pointer;transition:background .2s,color .2s,border-color .2s;line-height:1.6}
+.cap-cc-btn.off{background:transparent;color:var(--text-muted);border-color:var(--glass-border)}
+body.dark .cap-cc-btn.off{color:var(--text-muted)}
+.cap-line{font-size:.88rem;font-weight:500;line-height:1.75;min-height:1.6em;display:flex;flex-wrap:wrap;align-items:baseline;gap:0 5px}
+.cap-empty{font-size:.78rem;color:var(--text-muted);font-style:italic}
+/* Individual caption words */
+.cap-word{display:inline-block;transition:color .08s,text-shadow .12s,font-weight .12s}
+.cap-word.upcoming{color:var(--text-secondary)}
+body.dark .cap-word.upcoming{color:rgba(255,255,255,.45)}
+.cap-word.spoken{color:var(--text-muted)}
+body.dark .cap-word.spoken{color:rgba(255,255,255,.28)}
+.cap-word.active{color:var(--accent);font-weight:700;text-shadow:0 0 14px var(--accent),0 0 32px rgba(59,130,246,.35)}
+body.dark .cap-word.active{text-shadow:0 0 14px rgba(96,165,250,.9),0 0 36px rgba(96,165,250,.45)}
 .seek-lock-msg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:6;background:rgba(15,23,42,.88);color:white;padding:12px 22px;border-radius:var(--r-md);font-size:.82rem;font-weight:600;text-align:center;pointer-events:none;opacity:0;transition:opacity .3s}
 .seek-lock-msg.visible{opacity:1}
 .sic{display:flex;align-items:flex-start;gap:12px;padding:14px 18px;background:var(--glass-bg);backdrop-filter:blur(12px);border-radius:var(--r-md);border:1px solid var(--glass-border);margin-top:8px}
@@ -581,6 +600,10 @@ body.dark .qp-letter{background:rgba(255,255,255,.06)}
 @media(max-width:720px){.home-hero{flex-direction:column;padding:24px 20px 20px}.home-bottom{grid-template-columns:1fr}.hero-stats{flex-wrap:wrap}.course-grid{grid-template-columns:1fr;padding:0 20px 28px}.topnav-links{display:none}.community-grid{grid-template-columns:1fr!important}.topnav{padding:0 16px}.section-heading{padding:0 20px}.insight-banner{margin:0 20px 20px}.comp-strip{padding:10px 16px;gap:12px;flex-wrap:wrap}.player-main{padding:16px}}
 @media(max-width:400px){.home-hero h1{font-size:1.5rem}.clh-title{font-size:1.5rem}.clh-stats{flex-wrap:wrap;gap:12px}.clh-actions{flex-direction:column}.clh-actions .btn-primary,.clh-actions .btn-secondary{width:100%;min-width:unset}.splash-title{font-size:1.8rem}}
 
+/* ── Accessibility: bold text mode ── */
+body.a11y-bold *{font-weight:600!important}
+body.a11y-bold strong,body.a11y-bold b,body.a11y-bold h1,body.a11y-bold h2,body.a11y-bold h3,body.a11y-bold h4{font-weight:700!important}
+
 /* ── Freeze all hover effects on specific action buttons ── */
 .btn-no-hover:hover{transform:none!important}
 .btn-no-hover.btn-primary:hover{background:rgba(37,99,235,.72)!important;box-shadow:0 1px 0 0 rgba(255,255,255,.15) inset, 0 -1px 0 0 rgba(0,0,0,.08) inset, 0 4px 16px rgba(37,99,235,.15)!important}
@@ -736,7 +759,7 @@ body.dark .mic-btn{background:rgba(96,165,250,.5);border-color:rgba(255,255,255,
   <div class="player-layout">
     <div class="player-main">
       <div class="vid-container anim" id="vidContainer">
-        <video id="lessonVideo" preload="auto" playsinline aria-label="Module 3: Supply and Demand lesson video"><source src="econvid.mp4" type="video/mp4">Your browser does not support the video tag.</video>
+        <video id="lessonVideo" preload="auto" playsinline aria-label="Module 3: Supply and Demand lesson video"><source src="econvid.mp4" type="video/mp4"><track id="subTrack" src="subtitles.vtt" kind="subtitles" srclang="en" label="English">Your browser does not support the video tag.</video>
         <div class="vid-click-layer" id="vidClickLayer"></div>
         <div class="vid-ph" id="vidPlaceholder"><button class="play-btn btn-liquid" id="playBtn" onclick="haptic();startVideo()" aria-label="Play video">▶</button><div style="position:absolute;bottom:18px;left:0;right:0;text-align:center;z-index:2;font-size:.78rem;color:var(--text-secondary);font-weight:500">3.2 — Supply & Demand</div></div>
         <div class="vid-error" id="vidError" style="display:none" role="alert"><div style="font-size:1.5rem;margin-bottom:8px" aria-hidden="true">⚠</div><div>Video failed to load</div><div style="font-size:.75rem;color:var(--text-muted);margin-top:4px" id="vidErrorDetail">Check that econvid.mp4 is in the same folder as this file.</div></div>
@@ -762,9 +785,10 @@ body.dark .mic-btn{background:rgba(96,165,250,.5);border-color:rgba(255,255,255,
         </div>
       </div>
       <!-- ── Checkpoint bar: lives outside the native video element for cross-browser reliability ── -->
-      <div class="cp-bar" id="cpBar" role="region" aria-label="Lesson checkpoints">
+      <div class="cp-bar cap-open" id="cpBar" role="region" aria-label="Lesson checkpoints">
         <div class="cp-bar-hd">
           <span class="cp-bar-lbl">Lesson Checkpoints</span>
+          <button class="cap-cc-btn" id="capCCBtn" onclick="toggleCaptions()" aria-pressed="true" aria-label="Toggle captions">CC</button>
         </div>
         <div class="cp-bar-track" id="cpBarTrack" aria-hidden="true">
           <div class="cp-bar-fill" id="cpBarFill"></div>
@@ -774,6 +798,11 @@ body.dark .mic-btn{background:rgba(96,165,250,.5);border-color:rgba(255,255,255,
           <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M14 2v4h-4"/><path d="M14 6A7 7 0 1 1 9.9 2.2"/></svg>
           <span id="remedMsg">Rewatching this section — answer the checkpoint again after review.</span>
         </div>
+      </div>
+      <!-- ── Caption bar: word-by-word glow, toggled by CC button ── -->
+      <div class="cap-bar visible" id="capBar" aria-live="polite" aria-label="Live captions">
+        <div class="cap-hd"><span class="cap-lbl">Captions</span></div>
+        <div class="cap-line" id="capLine"><span class="cap-empty">Play the video to see captions.</span></div>
       </div>
       <div class="sic anim d2"><div style="width:36px;height:36px;border-radius:9px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--accent);flex-shrink:0">OBJ</div><div><h3>Learning Objective</h3><p>Understand how supply and demand interact to determine market prices, and how shifts in either curve affect equilibrium.</p></div></div>
     </div>
@@ -1261,10 +1290,87 @@ function closeSettings(){
   announce('Settings dialog closed');
 }
 function setFontSize(btn,px){btn.parentElement.querySelectorAll('.a11y-opt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.documentElement.style.fontSize=px+'px';haptic()}
-function setFontWeight(btn,w){btn.parentElement.querySelectorAll('.a11y-opt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.body.style.fontWeight=w==='bold'?'600':'';haptic()}
+function setFontWeight(btn,w){btn.parentElement.querySelectorAll('.a11y-opt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.body.classList.toggle('a11y-bold',w==='bold');haptic()}
 function setColorMode(btn,mode){btn.parentElement.querySelectorAll('.a11y-opt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.body.classList.remove('cb-deuteranopia','cb-protanopia','cb-tritanopia');if(mode!=='none')document.body.classList.add('cb-'+mode);haptic()}
 function setTheme(btn,theme){btn.parentElement.querySelectorAll('.a11y-opt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.body.classList.toggle('dark',theme==='dark');haptic()}
 function resetSettings(){document.documentElement.style.fontSize='';document.body.style.fontWeight='';document.body.classList.remove('cb-deuteranopia','cb-protanopia','cb-tritanopia','dark');document.querySelectorAll('.a11y-opt').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.a11y-group').forEach(g=>{const f=g.querySelector('.a11y-opt');if(f)f.classList.add('active')});haptic()}
+
+/* ═══════════════════════════════════════════
+   CAPTIONS — fetches subtitles.vtt and parses into JS array.
+   Using fetch (not <track>) so it works on both file:// and http://.
+   ═══════════════════════════════════════════ */
+let captions = [];   // [{s, e, t}] populated after fetch
+let captionsOn = true;
+let lastCueStart = -1;
+
+(function loadCaptions(){
+  fetch('subtitles.vtt')
+    .then(r => { if(!r.ok) throw 0; return r.text(); })
+    .then(text => {
+      const cues = [];
+      const blocks = text.trim().split(/\n\n+/);
+      for(const block of blocks){
+        const lines = block.trim().split('\n');
+        const ti = lines.findIndex(l => l.includes('-->'));
+        if(ti === -1) continue;
+        const toSec = str => {
+          const p = str.trim().split(':');
+          return +p[0]*3600 + +p[1]*60 + parseFloat(p[2]);
+        };
+        const [s, e] = lines[ti].split('-->').map(toSec);
+        const t = lines.slice(ti+1).join(' ').replace(/<[^>]+>/g,'').trim();
+        if(t) cues.push({s, e, t});
+      }
+      captions = cues;
+      // Refresh caption line if the video is already playing
+      lastCueStart = -1;
+    })
+    .catch(() => {
+      const line = document.getElementById('capLine');
+      if(line) line.innerHTML = '<span class="cap-empty">Could not load subtitles.vtt</span>';
+    });
+})();
+
+function toggleCaptions(){
+  captionsOn = !captionsOn;
+  const bar  = document.getElementById('capBar');
+  const btn  = document.getElementById('capCCBtn');
+  const cpBr = document.getElementById('cpBar');
+  const line = document.getElementById('capLine');
+  bar.classList.toggle('visible', captionsOn);
+  cpBr.classList.toggle('cap-open', captionsOn);
+  btn.classList.toggle('off', !captionsOn);
+  btn.setAttribute('aria-pressed', captionsOn);
+  lastCueStart = -1;
+  if(line) line.innerHTML = captionsOn
+    ? '<span class="cap-empty">—</span>'
+    : '<span class="cap-empty">Captions off.</span>';
+  haptic();
+}
+
+function updateCaptions(){
+  if(!captionsOn || !captions.length) return;
+  const line = document.getElementById('capLine');
+  if(!line) return;
+  const t = video.currentTime;
+  let cap = null;
+  for(const c of captions){ if(t >= c.s && t < c.e){ cap=c; break; } }
+  if(!cap){
+    if(lastCueStart !== -1){ line.innerHTML='<span class="cap-empty">—</span>'; lastCueStart=-1; }
+    return;
+  }
+  const words = cap.t.split(/\s+/);
+  const wordDur = (cap.e - cap.s) / words.length;
+  const wordIdx = Math.min(Math.floor((t - cap.s) / wordDur), words.length - 1);
+  if(cap.s !== lastCueStart){
+    line.innerHTML = words.map(w => `<span class="cap-word upcoming">${w}</span>`).join(' ');
+    lastCueStart = cap.s;
+  }
+  line.querySelectorAll('.cap-word').forEach((el,i)=>{
+    const cls = i < wordIdx ? 'spoken' : i === wordIdx ? 'active' : 'upcoming';
+    if(!el.classList.contains(cls)) el.className='cap-word '+cls;
+  });
+}
 
 /* ═══════════════════════════════════════════
    VIDEO PLAYER + GATED MASTERY CHECKPOINT SYSTEM
@@ -1325,6 +1431,10 @@ function initPlayer(){
   if(track){ Array.from(track.querySelectorAll('.cp-bm')).forEach(m=>m.remove()); }
   const fill=document.getElementById('cpBarFill'); if(fill) fill.style.width='0%';
   const rb=document.getElementById('remedBar'); if(rb) rb.classList.remove('visible');
+  lastCueStart=-1;
+  const cl=document.getElementById('capLine'); if(cl) cl.innerHTML='<span class="cap-empty">Play the video to see captions.</span>';
+  // Sync cp-bar border-radius with current caption visibility state
+  document.getElementById('cpBar').classList.toggle('cap-open', captionsOn);
   clearTimeout(remedBarTimer); remedBarTimer=null;
   const ph = document.getElementById('vidPlaceholder');
   const errEl = document.getElementById('vidError');
@@ -1476,6 +1586,7 @@ function onTimeUpdate(){
   compPct = Math.round((maxWatchedTime / video.duration)*100);
   updateMetrics();
   updateCpBarFill();
+  updateCaptions();
   // Check for checkpoint triggers — scan ALL to handle retry of any checkpoint
   for(let i=0; i<checkpoints.length; i++){
     if(!cpState[i].mastered && video.currentTime >= checkpoints[i].time - 0.5){
@@ -1575,11 +1686,13 @@ function handleQuizContinue(){
     // Show remediation notice in the checkpoint bar.
     // Clear any stale hide-timer first so a new incorrect attempt always shows fresh.
     clearTimeout(remedBarTimer);
+    const cp=checkpoints[currentCheckpoint];
+    const msg=document.getElementById('remedMsg');
+    if(msg) msg.textContent=cp.remediation||'Rewatching this section — answer the checkpoint again after review.';
     remedBar.classList.remove('visible');
     void remedBar.offsetHeight; // force reflow so fadeUp animation replays
     remedBar.classList.add('visible');
     remedBarTimer = setTimeout(()=> remedBar.classList.remove('visible'), 6000);
-    const cp=checkpoints[currentCheckpoint];
     video.currentTime = cp.segStart;
     maxWatchedTime = Math.max(maxWatchedTime, cp.segStart);
     rewatching=true;

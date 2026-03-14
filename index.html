@@ -331,25 +331,30 @@ body.dark .vid-container video{background:#0a0e1a}
 .vid-container.playing .vid-click-layer{cursor:pointer}
 /* When confusion overlay is open, hide the click layer so overlay receives events */
 .confusion-overlay.visible ~ .vid-click-layer{display:none}
-/* Checkpoint timeline overlay — sits just above native video controls */
-.cp-timeline{position:absolute;bottom:42px;left:0;right:0;height:36px;z-index:5;pointer-events:none;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease}
-.vid-container.controls-visible .cp-timeline{opacity:1;visibility:visible}
-.cp-marker{position:absolute;top:0;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:2px;pointer-events:auto;cursor:default}
-.cp-dot{width:12px;height:12px;border-radius:50%;background:var(--amber);border:2.5px solid white;box-shadow:0 1px 6px rgba(0,0,0,.25);transition:all .3s;position:relative;z-index:1}
-.cp-dot.mastered{background:var(--emerald)}
-.cp-dot.locked{background:var(--text-muted);opacity:.4}
-.cp-label{font-size:.58rem;font-weight:700;color:white;text-shadow:0 1px 3px rgba(0,0,0,.5);white-space:nowrap;letter-spacing:.03em;background:rgba(15,23,42,.75);padding:2px 7px;border-radius:5px;margin-top:2px;pointer-events:none}
-/* Checkpoint visibility toggle button */
-.cp-toggle{position:absolute;bottom:80px;right:12px;z-index:6;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(15,23,42,.65);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:white;font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease,background .2s}
-.vid-container.controls-visible .cp-toggle{opacity:1;visibility:visible}
-.cp-toggle:hover{background:rgba(15,23,42,.85)}
-.cp-toggle[aria-pressed="false"]{opacity:.6}
-.cp-toggle[aria-pressed="false"]:hover{opacity:.8}
-.vid-container.cp-hidden .cp-timeline{opacity:0!important;visibility:hidden!important}
 
-/* ── Remediation bar (gap/review indicator) ── */
-.remed-bar{position:absolute;top:0;left:0;right:0;z-index:6;padding:10px 20px;background:linear-gradient(135deg,rgba(217,119,6,.9),rgba(234,88,12,.85));color:white;font-size:.8rem;font-weight:600;text-align:center;display:none;animation:fadeUp .3s var(--ease-out) both;backdrop-filter:blur(8px)}
-.remed-bar.visible{display:block}
+/* ── Checkpoint bar — lives BELOW the video, outside the native player element ── */
+.cp-bar{background:var(--glass-bg);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-border);border-top:none;border-radius:0 0 var(--r-lg) var(--r-lg);padding:10px 18px 16px;display:flex;flex-direction:column;gap:12px;box-shadow:0 4px 16px rgba(31,38,135,.04)}
+.cp-bar-hd{display:flex;align-items:center;justify-content:space-between}
+.cp-bar-lbl{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted)}
+.cp-bar-track{position:relative;height:5px;background:rgba(0,0,0,.07);border-radius:var(--r-full);margin:0 7px 30px;overflow:visible}
+body.dark .cp-bar-track{background:rgba(255,255,255,.08)}
+.cp-bar-fill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--sky),#818cf8);border-radius:var(--r-full);width:0%;transition:width .5s var(--ease-out)}
+/* Checkpoint marker — dot centered on the track line; chip hangs below into bottom margin */
+.cp-bm{position:absolute;top:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center}
+.cp-bm-dot{width:14px;height:14px;border-radius:50%;border:2.5px solid white;background:var(--amber);box-shadow:0 1px 6px rgba(0,0,0,.18);transition:background .3s,transform .25s var(--ease-spring),box-shadow .3s;flex-shrink:0;margin-top:-7px}
+body.dark .cp-bm-dot{border-color:rgba(15,20,40,.9)}
+.cp-bm-dot.mastered{background:var(--emerald)}
+.cp-bm-dot.locked{background:var(--text-muted);opacity:.4}
+.cp-bm-dot.active{background:var(--accent);transform:scale(1.25);box-shadow:0 0 0 4px var(--accent-glow),0 1px 8px rgba(0,0,0,.18)}
+.cp-bm-dot.failed{background:var(--rose)}
+.cp-bm-chip{margin-top:8px;font-size:.58rem;font-weight:700;color:var(--text-muted);white-space:nowrap;letter-spacing:.03em;padding:2px 7px;border-radius:5px;background:var(--glass-bg);border:1px solid var(--glass-border)}
+.cp-bm-chip.mastered{color:var(--emerald);border-color:rgba(5,150,105,.2);background:var(--emerald-soft)}
+.cp-bm-chip.active{color:var(--accent);border-color:rgba(59,130,246,.2);background:var(--accent-soft)}
+.cp-bm-chip.failed{color:var(--rose);border-color:rgba(225,29,72,.2);background:var(--rose-soft)}
+/* Remediation notice — now in the checkpoint bar, NOT inside the video element */
+.remed-bar{display:none;align-items:center;gap:9px;padding:8px 14px;background:rgba(217,119,6,.1);border:1px solid rgba(217,119,6,.22);border-radius:var(--r-md);font-size:.78rem;font-weight:600;color:var(--amber);animation:fadeUp .3s var(--ease-out) both}
+.remed-bar.visible{display:flex}
+body.dark .remed-bar{background:rgba(217,119,6,.13);border-color:rgba(217,119,6,.3)}
 .seek-lock-msg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:6;background:rgba(15,23,42,.88);color:white;padding:12px 22px;border-radius:var(--r-md);font-size:.82rem;font-weight:600;text-align:center;pointer-events:none;opacity:0;transition:opacity .3s}
 .seek-lock-msg.visible{opacity:1}
 .sic{display:flex;align-items:flex-start;gap:12px;padding:14px 18px;background:var(--glass-bg);backdrop-filter:blur(12px);border-radius:var(--r-md);border:1px solid var(--glass-border);margin-top:8px}
@@ -576,6 +581,14 @@ body.dark .qp-letter{background:rgba(255,255,255,.06)}
 @media(max-width:720px){.home-hero{flex-direction:column;padding:24px 20px 20px}.home-bottom{grid-template-columns:1fr}.hero-stats{flex-wrap:wrap}.course-grid{grid-template-columns:1fr;padding:0 20px 28px}.topnav-links{display:none}.community-grid{grid-template-columns:1fr!important}.topnav{padding:0 16px}.section-heading{padding:0 20px}.insight-banner{margin:0 20px 20px}.comp-strip{padding:10px 16px;gap:12px;flex-wrap:wrap}.player-main{padding:16px}}
 @media(max-width:400px){.home-hero h1{font-size:1.5rem}.clh-title{font-size:1.5rem}.clh-stats{flex-wrap:wrap;gap:12px}.clh-actions{flex-direction:column}.clh-actions .btn-primary,.clh-actions .btn-secondary{width:100%;min-width:unset}.splash-title{font-size:1.8rem}}
 
+/* ── Freeze all hover effects on specific action buttons ── */
+.btn-no-hover:hover{transform:none!important}
+.btn-no-hover.btn-primary:hover{background:rgba(37,99,235,.72)!important;box-shadow:0 1px 0 0 rgba(255,255,255,.15) inset, 0 -1px 0 0 rgba(0,0,0,.08) inset, 0 4px 16px rgba(37,99,235,.15)!important}
+body.dark .btn-no-hover.btn-primary:hover{background:rgba(96,165,250,.5)!important}
+.btn-no-hover.btn-secondary:hover{border-color:var(--lg-border)!important;background:var(--lg-bg)!important}
+.btn-no-hover:hover::before{background-position:200% 0!important;transition:none!important;opacity:.35!important}
+.btn-no-hover:hover::after{opacity:0!important}
+
 /* ── Reduced motion / transparency ── */
 
 /* Dark mode glass button adjustments */
@@ -651,8 +664,8 @@ body.dark .mic-btn{background:rgba(96,165,250,.5);border-color:rgba(255,255,255,
       <div class="clh-stat"><div class="clh-stat-val" style="color:#fbbf24">3/6</div><div class="clh-stat-label">Modules</div></div>
     </div>
     <div class="clh-actions">
-      <button class="btn-primary btn-liquid btn-shine" onclick="haptic();goPage('player')" aria-label="Continue current lesson">Continue Lesson</button>
-      <button class="btn-secondary btn-shine" onclick="haptic();goPage('courses')" aria-label="View all modules">View Modules</button>
+      <button class="btn-primary btn-liquid btn-shine btn-no-hover" onclick="haptic();goPage('player')" aria-label="Continue current lesson">Continue Lesson</button>
+      <button class="btn-secondary btn-shine btn-no-hover" onclick="haptic();goPage('courses')" aria-label="View all modules">View Modules</button>
     </div>
   </div>
   <div class="course-landing-body">
@@ -684,7 +697,7 @@ body.dark .mic-btn{background:rgba(96,165,250,.5);border-color:rgba(255,255,255,
   <nav class="topnav" aria-label="Courses navigation"><div class="topnav-left"><button class="topnav-brand" onclick="goPage('home')" aria-label="Refero home"><div class="logo-mark" aria-hidden="true"><svg viewBox="0 0 28 14" width="18" height="9" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zM21 7c0-2.8-2.2-5-5-5s-5 2.2-5 5 2.2 5 5 5 5-2.2 5-5z"/></svg></div><span>refero</span></button><div class="topnav-links"><button class="topnav-link" onclick="goPage('home')">Home</button><button class="topnav-link active" onclick="goPage('landing')">Course</button></div></div><div class="topnav-right"><button class="topnav-link" onclick="openSettings()" aria-label="Open settings">Settings</button><button class="avatar" onclick="openSettings()" aria-label="User menu">G</button></div></nav>
   <div style="padding:36px">
     <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:24px"><h1 style="font-family:var(--font-display);font-size:1.8rem;font-weight:700">Introduction to Economics</h1><span style="font-size:.78rem;color:var(--text-muted)">1 course enrolled</span></div>
-    <div class="courses-detail-card glow-card anim">
+    <div class="courses-detail-card anim">
       <div class="cdc-header" style="background:linear-gradient(135deg,#dbeafe,#c7d2fe)"><div style="font-size:16px;font-weight:800;color:var(--text-bright);background:rgba(255,255,255,0.2);width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px)">EC</div><div class="cdc-header-info"><h2>Introduction to Economics</h2><p>Econ Academy · 6 Modules · Beginner</p></div><div class="cdc-header-stats"><div class="cdc-stat"><span class="cdc-stat-val" style="color:var(--sky)">62%</span><span class="cdc-stat-label">Completion</span></div><div class="cdc-stat"><span class="cdc-stat-val" style="color:var(--emerald)">44%</span><span class="cdc-stat-label">Mastery</span></div></div></div>
       <div class="cdc-modules">
         <div class="cdc-mod"><span class="cdc-mod-num done">✓</span><div class="cdc-mod-info"><strong>Module 1: What Is Economics?</strong><span>Scarcity, choice, opportunity cost</span></div><span class="cdc-mod-meta">12 min · <span style="color:var(--emerald)">Done</span></span></div>
@@ -727,11 +740,6 @@ body.dark .mic-btn{background:rgba(96,165,250,.5);border-color:rgba(255,255,255,
         <div class="vid-click-layer" id="vidClickLayer"></div>
         <div class="vid-ph" id="vidPlaceholder"><button class="play-btn btn-liquid" id="playBtn" onclick="haptic();startVideo()" aria-label="Play video">▶</button><div style="position:absolute;bottom:18px;left:0;right:0;text-align:center;z-index:2;font-size:.78rem;color:var(--text-secondary);font-weight:500">3.2 — Supply & Demand</div></div>
         <div class="vid-error" id="vidError" style="display:none" role="alert"><div style="font-size:1.5rem;margin-bottom:8px" aria-hidden="true">⚠</div><div>Video failed to load</div><div style="font-size:.75rem;color:var(--text-muted);margin-top:4px" id="vidErrorDetail">Check that econvid.mp4 is in the same folder as this file.</div></div>
-        <div class="remed-bar" id="remedBar" role="alert" aria-live="assertive">Rewatching this section — try the checkpoint again after review.</div>
-        <div class="cp-timeline" id="cpTimeline" role="group" aria-label="Video checkpoints"></div>
-        <button class="cp-toggle" id="cpToggle" aria-pressed="true" aria-label="Toggle checkpoint markers" onclick="toggleCheckpoints()" title="Toggle checkpoints">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="4" cy="8" r="2.5"/><circle cx="8" cy="8" r="2.5"/><circle cx="12" cy="8" r="2.5"/></svg>
-        </button>
         <div class="seek-lock-msg" id="seekLockMsg" role="alert" aria-live="assertive">Complete the current checkpoint before skipping ahead.</div>
         <div class="vid-context-menu" id="vidContextMenu">
           <div class="vcm-item" onclick="openConfusion()" role="button" tabindex="0" aria-label="Get AI explanation for this concept">Help me with this</div>
@@ -751,6 +759,20 @@ body.dark .mic-btn{background:rgba(96,165,250,.5);border-color:rgba(255,255,255,
             <button onclick="haptic();askCoFollowUp()" aria-label="Send follow-up question">Ask</button>
           </div>
           <div class="co-resume"><button onclick="haptic();resumeFromConfusion()" aria-label="Resume video playback">Resume Video</button></div>
+        </div>
+      </div>
+      <!-- ── Checkpoint bar: lives outside the native video element for cross-browser reliability ── -->
+      <div class="cp-bar" id="cpBar" role="region" aria-label="Lesson checkpoints">
+        <div class="cp-bar-hd">
+          <span class="cp-bar-lbl">Lesson Checkpoints</span>
+        </div>
+        <div class="cp-bar-track" id="cpBarTrack" aria-hidden="true">
+          <div class="cp-bar-fill" id="cpBarFill"></div>
+          <!-- markers injected by JS once video metadata loads -->
+        </div>
+        <div class="remed-bar" id="remedBar" role="alert" aria-live="assertive">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M14 2v4h-4"/><path d="M14 6A7 7 0 1 1 9.9 2.2"/></svg>
+          <span id="remedMsg">Rewatching this section — answer the checkpoint again after review.</span>
         </div>
       </div>
       <div class="sic anim d2"><div style="width:36px;height:36px;border-radius:9px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--accent);flex-shrink:0">OBJ</div><div><h3>Learning Objective</h3><p>Understand how supply and demand interact to determine market prices, and how shifts in either curve affect equilibrium.</p></div></div>
@@ -915,13 +937,6 @@ document.addEventListener('keydown', function(e){
 });
 
 /* ── Checkpoint toggle ── */
-function toggleCheckpoints(){
-  const vc = document.getElementById('vidContainer');
-  const btn = document.getElementById('cpToggle');
-  const hidden = vc.classList.toggle('cp-hidden');
-  btn.setAttribute('aria-pressed', String(!hidden));
-  announce(hidden ? 'Checkpoint markers hidden' : 'Checkpoint markers visible');
-}
 
 /* ── Haptic Sound ── */
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -994,9 +1009,85 @@ const confusionData = {
     equilibrium:"If concert tickets are $50 and 10,000 people want them but only 5,000 seats exist, the price rises until demand meets supply — say at $100 with 5,000 buyers."
   },
   diagram:{
-    demand:"Price ↑ → Quantity Demanded ↓<br>Price ↓ → Quantity Demanded ↑<br><br>The demand curve slopes downward from left to right.",
-    supply:"Price ↑ → Quantity Supplied ↑<br>Price ↓ → Quantity Supplied ↓<br><br>The supply curve slopes upward from left to right.",
-    equilibrium:"Supply curve (↗) meets Demand curve (↘)<br>→ Intersection = Equilibrium<br>→ Above equilibrium = Surplus<br>→ Below equilibrium = Shortage"
+    demand:`<div style="text-align:center">
+<svg viewBox="0 0 260 200" width="100%" style="max-width:250px;margin:0 auto;display:block" aria-label="Demand curve diagram" role="img">
+  <line x1="40" y1="170" x2="240" y2="170" stroke="var(--text-muted)" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="40" y1="20" x2="40" y2="170" stroke="var(--text-muted)" stroke-width="1.5" stroke-linecap="round"/>
+  <polyline points="235,165 240,170 235,175" fill="none" stroke="var(--text-muted)" stroke-width="1.5"/>
+  <polyline points="35,25 40,20 45,25" fill="none" stroke="var(--text-muted)" stroke-width="1.5"/>
+  <line x1="62" y1="32" x2="218" y2="158" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="18" y="100" text-anchor="middle" fill="var(--text-secondary)" font-size="10" font-family="Manrope" transform="rotate(-90,18,100)">Price (P)</text>
+  <text x="140" y="190" text-anchor="middle" fill="var(--text-secondary)" font-size="10" font-family="Manrope">Quantity Demanded (Q)</text>
+  <text x="226" y="162" fill="var(--accent)" font-size="12" font-weight="700" font-family="Manrope">D</text>
+  <line x1="40" y1="68" x2="118" y2="68" stroke="var(--emerald)" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="118" y1="68" x2="118" y2="170" stroke="var(--emerald)" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="40" y1="128" x2="172" y2="128" stroke="var(--rose)" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="172" y1="128" x2="172" y2="170" stroke="var(--rose)" stroke-width="1" stroke-dasharray="4,3"/>
+  <circle cx="118" cy="68" r="4" fill="var(--emerald)"/>
+  <circle cx="172" cy="128" r="4" fill="var(--rose)"/>
+  <text x="36" y="71" text-anchor="end" fill="var(--emerald)" font-size="9" font-family="Manrope">P₁</text>
+  <text x="118" y="184" text-anchor="middle" fill="var(--emerald)" font-size="9" font-family="Manrope">Q₁</text>
+  <text x="36" y="131" text-anchor="end" fill="var(--rose)" font-size="9" font-family="Manrope">P₂</text>
+  <text x="172" y="184" text-anchor="middle" fill="var(--rose)" font-size="9" font-family="Manrope">Q₂</text>
+</svg>
+<div style="margin-top:8px;text-align:left;font-size:.78rem;line-height:1.7">
+  <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><span style="width:10px;height:10px;border-radius:2px;background:var(--emerald);display:inline-block;flex-shrink:0"></span><span>High price P₁ → only Q₁ demanded (low)</span></div>
+  <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><span style="width:10px;height:10px;border-radius:2px;background:var(--rose);display:inline-block;flex-shrink:0"></span><span>Low price P₂ → Q₂ demanded (high)</span></div>
+  <div style="margin-top:6px;padding:6px 10px;background:var(--accent-soft);border-radius:6px;font-size:.75rem"><strong>Law of Demand:</strong> Price ↑ → Quantity demanded ↓ (inverse relationship — curve slopes down)</div>
+</div></div>`,
+    supply:`<div style="text-align:center">
+<svg viewBox="0 0 260 200" width="100%" style="max-width:250px;margin:0 auto;display:block" aria-label="Supply curve diagram" role="img">
+  <line x1="40" y1="170" x2="240" y2="170" stroke="var(--text-muted)" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="40" y1="20" x2="40" y2="170" stroke="var(--text-muted)" stroke-width="1.5" stroke-linecap="round"/>
+  <polyline points="235,165 240,170 235,175" fill="none" stroke="var(--text-muted)" stroke-width="1.5"/>
+  <polyline points="35,25 40,20 45,25" fill="none" stroke="var(--text-muted)" stroke-width="1.5"/>
+  <line x1="62" y1="158" x2="218" y2="32" stroke="var(--emerald)" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="18" y="100" text-anchor="middle" fill="var(--text-secondary)" font-size="10" font-family="Manrope" transform="rotate(-90,18,100)">Price (P)</text>
+  <text x="140" y="190" text-anchor="middle" fill="var(--text-secondary)" font-size="10" font-family="Manrope">Quantity Supplied (Q)</text>
+  <text x="224" y="36" fill="var(--emerald)" font-size="12" font-weight="700" font-family="Manrope">S</text>
+  <line x1="40" y1="72" x2="184" y2="72" stroke="var(--amber)" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="184" y1="72" x2="184" y2="170" stroke="var(--amber)" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="40" y1="130" x2="118" y2="130" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="118" y1="130" x2="118" y2="170" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="4,3"/>
+  <circle cx="184" cy="72" r="4" fill="var(--amber)"/>
+  <circle cx="118" cy="130" r="4" fill="var(--text-muted)"/>
+  <text x="36" y="75" text-anchor="end" fill="var(--amber)" font-size="9" font-family="Manrope">P₂</text>
+  <text x="184" y="184" text-anchor="middle" fill="var(--amber)" font-size="9" font-family="Manrope">Q₂</text>
+  <text x="36" y="133" text-anchor="end" fill="var(--text-muted)" font-size="9" font-family="Manrope">P₁</text>
+  <text x="118" y="184" text-anchor="middle" fill="var(--text-muted)" font-size="9" font-family="Manrope">Q₁</text>
+</svg>
+<div style="margin-top:8px;text-align:left;font-size:.78rem;line-height:1.7">
+  <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><span style="width:10px;height:10px;border-radius:2px;background:var(--amber);display:inline-block;flex-shrink:0"></span><span>High price P₂ → producers supply more Q₂</span></div>
+  <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><span style="width:10px;height:10px;border-radius:2px;background:var(--text-muted);display:inline-block;flex-shrink:0"></span><span>Low price P₁ → producers supply less Q₁</span></div>
+  <div style="margin-top:6px;padding:6px 10px;background:var(--emerald-soft);border-radius:6px;font-size:.75rem;color:var(--emerald)"><strong>Law of Supply:</strong> Price ↑ → Quantity supplied ↑ (direct relationship — curve slopes up)</div>
+</div></div>`,
+    equilibrium:`<div style="text-align:center">
+<svg viewBox="0 0 260 210" width="100%" style="max-width:250px;margin:0 auto;display:block" aria-label="Supply and demand equilibrium diagram" role="img">
+  <line x1="40" y1="170" x2="240" y2="170" stroke="var(--text-muted)" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="40" y1="20" x2="40" y2="170" stroke="var(--text-muted)" stroke-width="1.5" stroke-linecap="round"/>
+  <polyline points="235,165 240,170 235,175" fill="none" stroke="var(--text-muted)" stroke-width="1.5"/>
+  <polyline points="35,25 40,20 45,25" fill="none" stroke="var(--text-muted)" stroke-width="1.5"/>
+  <line x1="58" y1="32" x2="220" y2="162" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="58" y1="162" x2="220" y2="32" stroke="var(--emerald)" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="18" y="100" text-anchor="middle" fill="var(--text-secondary)" font-size="10" font-family="Manrope" transform="rotate(-90,18,100)">Price (P)</text>
+  <text x="140" y="190" text-anchor="middle" fill="var(--text-secondary)" font-size="10" font-family="Manrope">Quantity (Q)</text>
+  <text x="227" y="165" fill="var(--accent)" font-size="11" font-weight="700" font-family="Manrope">D</text>
+  <text x="227" y="36" fill="var(--emerald)" font-size="11" font-weight="700" font-family="Manrope">S</text>
+  <line x1="40" y1="97" x2="139" y2="97" stroke="var(--amber)" stroke-width="1.2" stroke-dasharray="4,3"/>
+  <line x1="139" y1="97" x2="139" y2="170" stroke="var(--amber)" stroke-width="1.2" stroke-dasharray="4,3"/>
+  <circle cx="139" cy="97" r="6" fill="var(--amber)" stroke="white" stroke-width="2"/>
+  <text x="36" y="100" text-anchor="end" fill="var(--amber)" font-size="9" font-family="Manrope" font-weight="700">P*</text>
+  <text x="139" y="184" text-anchor="middle" fill="var(--amber)" font-size="9" font-family="Manrope" font-weight="700">Q*</text>
+  <text x="147" y="93" fill="var(--amber)" font-size="9" font-weight="700" font-family="Manrope">E</text>
+  <text x="75" y="52" fill="var(--text-muted)" font-size="8" font-family="Manrope" opacity=".75">← Surplus</text>
+  <text x="165" y="148" fill="var(--text-muted)" font-size="8" font-family="Manrope" opacity=".75">Shortage →</text>
+</svg>
+<div style="margin-top:8px;text-align:left;font-size:.78rem;line-height:1.7">
+  <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><span style="width:10px;height:10px;border-radius:50%;background:var(--amber);display:inline-block;flex-shrink:0"></span><span><strong>E</strong> = Equilibrium — where D ∩ S. Qs = Qd at price P*</span></div>
+  <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><span style="width:10px;height:10px;border-radius:2px;background:var(--accent);display:inline-block;flex-shrink:0"></span><span>D slopes ↘ — higher price, fewer buyers</span></div>
+  <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><span style="width:10px;height:10px;border-radius:2px;background:var(--emerald);display:inline-block;flex-shrink:0"></span><span>S slopes ↗ — higher price, more sellers</span></div>
+  <div style="margin-top:6px;padding:6px 10px;background:var(--amber-soft);border-radius:6px;font-size:.75rem;color:var(--amber)">Above P*: surplus (price falls). Below P*: shortage (price rises). Market self-corrects to E.</div>
+</div></div>`
   }
 };
 
@@ -1179,53 +1270,67 @@ function resetSettings(){document.documentElement.style.fontSize='';document.bod
    VIDEO PLAYER + GATED MASTERY CHECKPOINT SYSTEM
    ═══════════════════════════════════════════ */
 const video = document.getElementById('lessonVideo');
-let compPct=0, knowPct=0, currentCheckpoint=0, checkpointMastered=[], rewatching=false;
+let compPct=0, knowPct=0, currentCheckpoint=0, rewatching=false;
 let maxWatchedTime = 0; // tracks the furthest legitimately-reached time
 let seekLockTimeout = null;
+let remedBarTimer = null; // single tracked timer so new incorrect attempts never race with stale hide calls
+// cpState replaces the old parallel checkpointMastered[] + questionVariant[] arrays.
+// Each checkpoint gets its own state envelope — nothing can bleed across checkpoints.
+let cpState = []; // [{mastered:bool, failCount:int, retryVariant:int}]
 
 const checkpoints = [
   { time:40, segStart:0, topic:'Law of Demand',
+    remediation:'Review: when price rises, quantity demanded falls. The demand curve always slopes downward — higher cost means fewer buyers.',
     questions:[
       {q:"According to the law of demand, what generally happens when the price of a good increases?",opts:["Quantity demanded increases","Quantity demanded decreases","Quantity demanded stays the same","Supply increases"],correct:1,yFb:"Correct — as price rises, consumers typically buy less.",nFb:"The law of demand says higher prices lead to lower quantity demanded."},
       {q:"Which of the following would shift the demand curve to the right?",opts:["A decrease in consumer income","An increase in the price of the good","An increase in consumer preferences for the good","A decrease in population"],correct:2,yFb:"Correct — stronger preferences increase demand at every price level.",nFb:"When more people want a product, the entire demand curve shifts right."}
     ]},
   { time:100, segStart:41, topic:'Law of Supply',
+    remediation:'Review: when price rises, producers supply more. The supply curve slopes upward — higher revenue attracts more output.',
     questions:[
       {q:"According to the law of supply, what happens when the price of a good increases?",opts:["Producers supply less","Producers supply more","Supply stays the same","Demand increases"],correct:1,yFb:"Correct — higher prices incentivize producers to supply more.",nFb:"The law of supply says producers are willing to sell more at higher prices."},
       {q:"Which of the following would shift the supply curve to the left?",opts:["Lower production costs","New technology","An increase in input costs","More firms entering the market"],correct:2,yFb:"Correct — higher input costs reduce supply at every price level.",nFb:"When production becomes more expensive, supply decreases (shifts left)."}
     ]},
   { time:180, segStart:101, topic:'Market Equilibrium',
+    remediation:'Review: equilibrium is where supply meets demand. At that price, quantity supplied equals quantity demanded — no surplus or shortage.',
     questions:[
       {q:"At the equilibrium price, which of the following is true?",opts:["There is a surplus","There is a shortage","Quantity supplied equals quantity demanded","Demand exceeds supply"],correct:2,yFb:"Correct — equilibrium is where supply meets demand with no surplus or shortage.",nFb:"At equilibrium, the quantity buyers want to buy exactly matches what sellers want to sell."},
       {q:"If demand increases while supply stays the same, what happens to the equilibrium price?",opts:["Price falls","Price stays the same","Price rises","Price becomes zero"],correct:2,yFb:"Correct — increased demand with unchanged supply pushes the price up.",nFb:"More demand competing for the same supply drives the equilibrium price higher."}
     ]}
 ];
 
-let questionVariant = [0,0,0];
+// (questionVariant[] removed — now lives inside cpState[i].retryVariant)
 
 /* ── Get the maximum allowed seek position ── */
 function getMaxAllowedTime(){
-  // Can only go up to the next un-mastered checkpoint or maxWatchedTime, whichever is less
   for(let i=0; i<checkpoints.length; i++){
-    if(!checkpointMastered[i]) return Math.min(maxWatchedTime + 2, checkpoints[i].time + 1);
+    if(!cpState[i].mastered) return Math.min(maxWatchedTime + 2, checkpoints[i].time + 1);
   }
-  // All mastered → full video
   return video.duration || 9999;
 }
 
 function initPlayer(){
-  compPct=0; knowPct=0; currentCheckpoint=0;
-  checkpointMastered=[false,false,false];
-  questionVariant=[0,0,0]; rewatching=false;
+  compPct=0; knowPct=0; currentCheckpoint=0; rewatching=false;
   maxWatchedTime=0;
+  // Per-checkpoint state — isolated objects so no checkpoint can affect another
+  cpState = checkpoints.map(()=>({mastered:false, failCount:0, retryVariant:0}));
   updateMetrics();
+  // Reset listener-guard flags so startVideo() re-attaches them on every player visit
+  video.removeEventListener('timeupdate', onTimeUpdate);
+  video.removeEventListener('seeking', onSeeking);
+  timeUpdateBound=false;
+  seekingBound=false;
+  // Clear any stale checkpoint bar markers from a previous session
+  const track=document.getElementById('cpBarTrack');
+  if(track){ Array.from(track.querySelectorAll('.cp-bm')).forEach(m=>m.remove()); }
+  const fill=document.getElementById('cpBarFill'); if(fill) fill.style.width='0%';
+  const rb=document.getElementById('remedBar'); if(rb) rb.classList.remove('visible');
+  clearTimeout(remedBarTimer); remedBarTimer=null;
   const ph = document.getElementById('vidPlaceholder');
   const errEl = document.getElementById('vidError');
   ph.style.display='flex';
   errEl.style.display='none';
   video.removeAttribute('controls');
-  video.removeEventListener('timeupdate', onTimeUpdate);
-  video.removeEventListener('seeking', onSeeking);
   document.getElementById('vidContainer').classList.remove('playing');
   video.onerror = function(){
     ph.style.display='none';
@@ -1249,8 +1354,8 @@ function startVideo(){
   video.setAttribute('controls','');
   if(!timeUpdateBound){ video.addEventListener('timeupdate', onTimeUpdate); timeUpdateBound=true; }
   if(!seekingBound){ video.addEventListener('seeking', onSeeking); seekingBound=true; }
-  video.addEventListener('loadedmetadata', renderCheckpointMarkers, {once:true});
-  if(video.duration) renderCheckpointMarkers();
+  video.addEventListener('loadedmetadata', renderCpBar, {once:true});
+  if(video.duration) renderCpBar();
   initControlsTracking();
   const p = video.play();
   if(p!==undefined) p.catch(err=>{
@@ -1269,64 +1374,20 @@ function initControlsTracking(){
   controlsTrackingInit = true;
   const vc = document.getElementById('vidContainer');
 
-  // Mouse enters → show checkpoints + start keep-alive that pokes the native controls
+  // Mouse enters/leaves — keep-alive keeps native controls bar visible while hovering
   vc.addEventListener('mouseenter', (e) => {
     mouseInsidePlayer = true;
-    lastMousePos.x = e.clientX;
-    lastMousePos.y = e.clientY;
-    if(!(document.fullscreenElement || document.webkitFullscreenElement)){
-      vc.classList.add('controls-visible');
-    }
+    lastMousePos.x = e.clientX; lastMousePos.y = e.clientY;
     startKeepAlive();
   });
-
-  // Track latest mouse position so synthetic events go to the right spot
   vc.addEventListener('mousemove', (e) => {
-    lastMousePos.x = e.clientX;
-    lastMousePos.y = e.clientY;
+    lastMousePos.x = e.clientX; lastMousePos.y = e.clientY;
   });
-
-  // Mouse leaves → hide checkpoints + stop keep-alive
   vc.addEventListener('mouseleave', () => {
     mouseInsidePlayer = false;
-    vc.classList.remove('controls-visible');
     stopKeepAlive();
   });
-
-  // Touch → show for 3s then hide
-  vc.addEventListener('touchstart', () => {
-    vc.classList.add('controls-visible');
-    clearTimeout(controlsHideTimer);
-    controlsHideTimer = setTimeout(()=>{
-      if(!video.paused) vc.classList.remove('controls-visible');
-    }, 3000);
-  }, {passive:true});
-
-  // Paused → always show checkpoints
-  video.addEventListener('pause', ()=>{
-    vc.classList.add('controls-visible');
-  });
-
-  // Play → only keep visible if mouse is inside
-  video.addEventListener('play', ()=>{
-    if(!mouseInsidePlayer) vc.classList.remove('controls-visible');
-  });
-
-  // Fullscreen — hide checkpoints (they don't render in native fullscreen)
-  document.addEventListener('fullscreenchange', onFullscreenChange);
-  document.addEventListener('webkitfullscreenchange', onFullscreenChange);
-}
-
-function onFullscreenChange(){
-  const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
-  const vc = document.getElementById('vidContainer');
-  if(isFs){
-    vc.classList.remove('controls-visible');
-    stopKeepAlive();
-  } else if(mouseInsidePlayer){
-    vc.classList.add('controls-visible');
-    startKeepAlive();
-  }
+  vc.addEventListener('touchstart', ()=>{ /* nothing extra needed */ }, {passive:true});
 }
 
 // Dispatch synthetic mousemove on the video every 2s to reset the browser's
@@ -1362,28 +1423,50 @@ function showSeekLock(){
   seekLockTimeout = setTimeout(()=> msg.classList.remove('visible'), 2200);
 }
 
-/* ── Checkpoint markers on the timeline ── */
-function renderCheckpointMarkers(){
-  const timeline = document.getElementById('cpTimeline');
-  if(!video.duration || timeline.children.length) return;
+/* ── Checkpoint bar render + update (external bar, not inside video) ── */
+function renderCpBar(){
+  const track = document.getElementById('cpBarTrack');
+  if(!video.duration || !track) return;
+  // Don't re-render if markers already exist (e.g. loadedmetadata fires twice)
+  if(track.querySelectorAll('.cp-bm').length === checkpoints.length) return;
   checkpoints.forEach((cp,i)=>{
     const pct = (cp.time / video.duration) * 100;
-    const marker = document.createElement('div');
-    marker.className = 'cp-marker';
-    marker.id = 'cpMarker' + i;
-    marker.style.left = pct + '%';
-    const cls = checkpointMastered[i] ? 'mastered' : (i <= currentCheckpoint ? '' : 'locked');
-    marker.innerHTML = `<div class="cp-dot ${cls}"></div><div class="cp-label">Check ${i+1}</div>`;
-    timeline.appendChild(marker);
+    const m = document.createElement('div');
+    m.className = 'cp-bm'; m.id = 'cpBm'+i;
+    m.style.left = pct + '%';
+    const st = cpState[i];
+    const dc = st.mastered ? 'mastered' : (i === currentCheckpoint ? 'active' : 'locked');
+    m.innerHTML = `<div class="cp-bm-dot ${dc}"></div><div class="cp-bm-chip ${dc}">${st.mastered ? '✓ ' : ''}Check ${i+1}</div>`;
+    track.appendChild(m);
   });
+  updateCpBarFill();
 }
 
-function updateCheckpointMarkers(){
+function updateCpBar(){
   checkpoints.forEach((cp,i)=>{
-    const dot = document.querySelector('#cpMarker'+i+' .cp-dot');
-    if(!dot) return;
-    dot.className = 'cp-dot ' + (checkpointMastered[i] ? 'mastered' : (i<=currentCheckpoint ? '' : 'locked'));
+    const m = document.getElementById('cpBm'+i);
+    if(!m) return;
+    const st = cpState[i];
+    let dc, label;
+    if(st.mastered){
+      dc='mastered'; label='✓ Check '+(i+1);
+    } else if(st.failCount>0 && i===currentCheckpoint){
+      dc='failed'; label='Retry '+(i+1);
+    } else if(i===currentCheckpoint){
+      dc='active'; label='Check '+(i+1);
+    } else {
+      dc='locked'; label='Check '+(i+1);
+    }
+    m.querySelector('.cp-bm-dot').className='cp-bm-dot '+dc;
+    const chip=m.querySelector('.cp-bm-chip'); chip.className='cp-bm-chip '+dc; chip.textContent=label;
   });
+  updateCpBarFill();
+}
+
+function updateCpBarFill(){
+  if(!video.duration) return;
+  const fill=document.getElementById('cpBarFill');
+  if(fill) fill.style.width=Math.round((maxWatchedTime/video.duration)*100)+'%';
 }
 
 function onTimeUpdate(){
@@ -1392,16 +1475,17 @@ function onTimeUpdate(){
   if(video.currentTime > maxWatchedTime) maxWatchedTime = video.currentTime;
   compPct = Math.round((maxWatchedTime / video.duration)*100);
   updateMetrics();
+  updateCpBarFill();
   // Check for checkpoint triggers — scan ALL to handle retry of any checkpoint
   for(let i=0; i<checkpoints.length; i++){
-    if(!checkpointMastered[i] && video.currentTime >= checkpoints[i].time - 0.5){
+    if(!cpState[i].mastered && video.currentTime >= checkpoints[i].time - 0.5){
       video.pause();
       triggerCheckpoint(i);
       break;
     }
   }
   // If video ended and all mastered → reflection
-  if(video.currentTime >= video.duration - 0.5 && checkpointMastered.every(Boolean)){
+  if(video.currentTime >= video.duration - 0.5 && cpState.every(s=>s.mastered)){
     video.pause();
     openSummary();
   }
@@ -1410,9 +1494,10 @@ function onTimeUpdate(){
 function triggerCheckpoint(idx){
   document.getElementById('remedBar').classList.remove('visible');
   currentCheckpoint = idx;
-  rewatching = false; // reset rewatch flag on new checkpoint trigger
+  rewatching = false;
   const cp = checkpoints[idx];
-  const variant = questionVariant[idx] % cp.questions.length;
+  const st = cpState[idx]; // isolated per-checkpoint state
+  const variant = st.retryVariant % cp.questions.length;
   const q = cp.questions[variant];
   document.getElementById('qQ').textContent = q.q;
   const oel = document.getElementById('qOpts'); oel.innerHTML='';
@@ -1436,6 +1521,7 @@ function triggerCheckpoint(idx){
   ov.style.display='flex';
   requestAnimationFrame(()=>{
     ov.classList.add('visible');
+    updateCpBar(); // mark this checkpoint as active/failed in the bar
     trapFocus(ov.querySelector('.qc'));
     announce('Knowledge check ' + (idx+1) + ' of ' + checkpoints.length + ': ' + cp.topic);
   });
@@ -1451,21 +1537,22 @@ function answerCheckpoint(el,correct,cpIdx,q){
   if(correct){
     el.classList.add('correct');
     fb.className='q-fb correct'; fb.textContent=q.yFb;
-    checkpointMastered[cpIdx]=true;
-    knowPct=Math.min(100, Math.round(((checkpointMastered.filter(Boolean).length)/checkpoints.length)*100));
+    cpState[cpIdx].mastered=true;
+    knowPct=Math.min(100, Math.round((cpState.filter(s=>s.mastered).length/checkpoints.length)*100));
     updateMetrics();
-    updateCheckpointMarkers();
+    updateCpBar(); // mark checkpoint as mastered in the bar
     lastAnswerCorrect=true;
     document.getElementById('contBtn').textContent='Continue Watching';
     announce('Correct! ' + q.yFb);
   } else {
     el.classList.add('wrong');
-    const correctIdx = q.correct;
-    document.querySelectorAll('.q-opt')[correctIdx]?.classList?.add?.('correct');
+    document.querySelectorAll('.q-opt')[q.correct]?.classList?.add?.('correct');
     fb.className='q-fb rewatch'; fb.textContent=q.nFb + ' You\'ll rewatch this segment and try a different question.';
-    questionVariant[cpIdx]++;
+    cpState[cpIdx].retryVariant++; // advance variant within THIS checkpoint's state only
+    cpState[cpIdx].failCount++;
     lastAnswerCorrect=false;
     document.getElementById('contBtn').textContent='Rewatch Segment';
+    updateCpBar(); // show failed dot in the bar
     announce('Incorrect. ' + q.nFb);
   }
   document.getElementById('contBtn').classList.add('enabled');
@@ -1482,11 +1569,16 @@ function handleQuizContinue(){
     currentCheckpoint++;
     rewatching = false;
     remedBar.classList.remove('visible');
+    updateCpBar(); // advance active marker to next checkpoint
     video.play();
   } else {
-    // Show remediation bar
+    // Show remediation notice in the checkpoint bar.
+    // Clear any stale hide-timer first so a new incorrect attempt always shows fresh.
+    clearTimeout(remedBarTimer);
+    remedBar.classList.remove('visible');
+    void remedBar.offsetHeight; // force reflow so fadeUp animation replays
     remedBar.classList.add('visible');
-    setTimeout(()=> remedBar.classList.remove('visible'), 5000); // auto-hide after 5s
+    remedBarTimer = setTimeout(()=> remedBar.classList.remove('visible'), 6000);
     const cp=checkpoints[currentCheckpoint];
     video.currentTime = cp.segStart;
     maxWatchedTime = Math.max(maxWatchedTime, cp.segStart);

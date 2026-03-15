@@ -1811,31 +1811,6 @@ const tutorScript = [
       {condition:'offTopic', r:"Wait, I don't think that's about demand? I was asking about the relationship between price and how much people buy. Can you try that?"},
       {condition:'refusal', r:"That's okay! Here's a hint: demand is about how much of something people want to buy at different prices. Can you explain that in your own words?"},
       {condition:'strong', r:"Oh okay, that makes sense! So when the price goes up, people buy less, and when it goes down, they buy more. I think I get demand now."}
-    ]},
-  { id:'supply',
-    prompt:"Okay I think I get demand. But what about supply? How is supply different from demand? What makes producers want to supply more or less?",
-    concepts:['supply','producer','sell','quantity','price','upward','increase','cost','profit','incentive','more','willing','output','production','curve'],
-    exampleWords:['farmer','factory','lemonade','expensive','profit','cost','example','business','company','manufacture'],
-    clarifications:[
-      {condition:'tooShort', r:"I need a bit more than that. I still can't tell how supply is different from demand. Can you explain what motivates producers?"},
-      {condition:'noCore', r:"You mentioned supply but I don't understand what drives it. Why would producers supply more when the price is higher?"},
-      {condition:'noExample', r:"I think I'm getting closer, but can you give me a concrete example of how supply works in the real world?"},
-      {condition:'offTopic', r:"I think you might be describing demand, not supply. Supply is about what producers are willing to sell. Can you focus on the seller's perspective?"},
-      {condition:'confused', r:"Hmm, it sounds like you might be mixing up supply and demand. Demand is about buyers. Supply is about sellers. Can you explain supply from the seller's point of view?"},
-      {condition:'refusal', r:"No worries. Here's a hint: supply is about how much producers are willing to sell at different prices. Higher prices usually mean more supply. Can you explain why?"},
-      {condition:'strong', r:"That really helps! So producers want to sell more when prices are high because they make more profit. And supply slopes upward. Got it!"}
-    ]},
-  { id:'equilibrium',
-    prompt:"One more thing I'm confused about: equilibrium. What happens when supply and demand meet? How does the market figure out the right price?",
-    concepts:['equilibrium','balance','market','price','quantity','surplus','shortage','meet','intersection','clear','equal','adjust','settle'],
-    exampleWords:['example','concert','tickets','housing','imagine','suppose','too many','not enough','price goes up','price goes down'],
-    clarifications:[
-      {condition:'tooShort', r:"I need more detail. What actually happens at the equilibrium price? And what goes wrong if the price is above or below it?"},
-      {condition:'noCore', r:"I still don't get how equilibrium works. What does it mean for supply to equal demand? What happens if they don't match?"},
-      {condition:'noExample', r:"Could you give me a real-world example? Like what happens when there's a shortage or surplus of something?"},
-      {condition:'offTopic', r:"I think that's about something else — I was asking about how supply and demand determine the market price together."},
-      {condition:'refusal', r:"Let me give you a hint: if too many people want concert tickets and there aren't enough, the price goes up until it balances out. Can you explain that process?"},
-      {condition:'strong', r:"Oh, that's a great example! So the market adjusts the price until the amount people want to buy matches the amount sellers provide. That makes total sense!"}
     ]}
 ];
 
@@ -1870,7 +1845,7 @@ function closeFeynman(){
   if(recognition) try{recognition.stop()}catch(e){}
   isRecording = false;
 
-  if(lastTutorScore >= 7){
+  if(lastTutorScore >= 2){
     // Passed — unlock next module
     module4Unlocked = true;
     unlockModule4();
@@ -2203,16 +2178,16 @@ function showTutorSummary(){
     else { gaps.push(`<strong>${step.id}:</strong> You were unable to explain this — it needs focused review.`); }
   });
   if(!strengths.length) strengths.push('You attempted each question, which is a start. But none of your explanations demonstrated clear understanding yet.');
-  if(totalScore>=8) nextSteps.push('Strong work. Try writing a program that combines all three concepts.');
-  else if(totalScore>=5){ nextSteps.push('Rewatch the sections where your explanation was weakest.'); nextSteps.push('Practice writing one example for each concept you struggled with.'); }
-  else { nextSteps.push('Rewatch section 3.2 from the beginning before moving on.'); nextSteps.push('Read the sidebar notes and explain each concept out loud to yourself.'); nextSteps.push('Focus on one concept at a time: master demand before tackling supply and equilibrium.'); }
-  const ready = totalScore >= 7;
+  if(totalScore>=3) nextSteps.push('Strong work. You clearly understand the core concept.');
+  else if(totalScore>=2){ nextSteps.push('Rewatch the sections where your explanation was weakest.'); nextSteps.push('Practice writing one example for the concept you struggled with.'); }
+  else { nextSteps.push('Rewatch the module from the beginning before moving on.'); nextSteps.push('Read the sidebar notes and explain the concept out loud to yourself.'); }
+  const ready = totalScore >= 2;
   lastTutorScore = totalScore;
 
   const thread = document.getElementById('tutorThread');
   const s = document.createElement('div'); s.className='t-msg ai'; s.style.maxWidth='100%';
   s.innerHTML = `<div class="tutor-fb"><h3>Your Reflection Summary</h3>
-    <div style="font-size:.75rem;color:var(--text-muted);margin-bottom:12px">Score: ${totalScore}/9 — ${totalScore>=7?'Strong understanding':totalScore>=4?'Partial — review recommended':'Significant gaps — review needed'}</div>
+    <div style="font-size:.75rem;color:var(--text-muted);margin-bottom:12px">Score: ${totalScore}/3 — ${totalScore>=2?'Strong understanding':totalScore>=1?'Partial — review recommended':'Significant gaps — review needed'}</div>
     <div class="tutor-fb-section strengths"><h4>What You Explained Well</h4><p>${strengths.join('<br>')}</p></div>
     <div class="tutor-fb-section gaps"><h4>What Still Needs Work</h4><p>${gaps.length?gaps.join('<br>'):'No significant gaps — strong work.'}</p></div>
     <div class="tutor-fb-section next"><h4>Suggested Next Steps</h4><p>${nextSteps.join('<br>')}</p></div>

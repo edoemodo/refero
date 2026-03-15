@@ -383,19 +383,20 @@ body.dark .cap-word.active{text-shadow:0 0 14px rgba(96,165,250,.9),0 0 36px rgb
 .p-sidebar{border-left:1px solid var(--border-subtle);background:var(--bg-elevated);display:flex;flex-direction:column;overflow:hidden}
 .sb-header{padding:14px 16px;border-bottom:1px solid var(--border-subtle);font-size:.78rem;font-weight:700;color:var(--text-bright)}
 .sb-scroll{flex:1;padding:12px;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
-.nc{background:var(--bg-elevated);border:1px solid var(--border-subtle);border-radius:12px;padding:13px 16px;transition:border-color .3s}
+.nc{background:var(--bg-elevated);border:1px solid var(--border-subtle);border-radius:12px;padding:13px 16px;transition:border-color .3s,box-shadow .3s}
 .nc:hover{border-color:var(--border-focus)}
+.nc.nc-active{border-color:var(--accent);box-shadow:0 0 14px rgba(59,130,246,.12)}
 .nc h4{font-size:.75rem;font-weight:600;color:var(--accent);margin-bottom:4px}
 .nc p{font-size:.72rem;color:var(--text-secondary);line-height:1.6}
 .kt{display:inline;background:var(--accent-soft);color:var(--accent);padding:1px 5px;border-radius:3px;font-weight:600;font-size:.7rem;font-family:var(--font-mono)}
 .mod-sections{padding:12px;border-top:1px solid var(--border-subtle)}
 .mod-sections h4{font-size:.66rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:8px}
 .sec-list{display:flex;flex-direction:column;gap:2px}
-.sec-item{display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:var(--r-sm);cursor:pointer;transition:background .2s;font-size:.75rem}
+.sec-item{display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:var(--r-sm);cursor:pointer;transition:background .2s,box-shadow .3s,color .2s;font-size:.75rem}
 .sec-item:hover{background:var(--accent-soft)}
-.sec-item.active{background:var(--accent-soft);color:var(--accent)}
-.sec-dot{width:6px;height:6px;border-radius:50%;background:var(--text-muted);flex-shrink:0}
-.sec-item.active .sec-dot{background:var(--accent)}
+.sec-item.active{background:var(--accent-soft);color:var(--accent);font-weight:600;box-shadow:inset 3px 0 0 var(--accent),0 0 12px rgba(59,130,246,.15)}
+.sec-dot{width:6px;height:6px;border-radius:50%;background:var(--text-muted);flex-shrink:0;transition:background .2s,box-shadow .3s}
+.sec-item.active .sec-dot{background:var(--accent);box-shadow:0 0 6px var(--accent)}
 .sec-item.completed .sec-dot{background:var(--emerald)}
 .sec-time{margin-left:auto;font-size:.66rem;color:var(--text-muted);font-variant-numeric:tabular-nums;font-family:var(--font-mono)}
 
@@ -724,12 +725,12 @@ body.dark .mic-btn{background:rgba(96,165,250,.5);border-color:rgba(255,255,255,
       <div class="cdc-modules">
         <div class="cdc-mod"><span class="cdc-mod-num done">✓</span><div class="cdc-mod-info"><strong>Module 1: What Is Economics?</strong><span>Scarcity, choice, opportunity cost</span></div><span class="cdc-mod-meta">12 min · <span style="color:var(--emerald)">Done</span></span></div>
         <div class="cdc-mod"><span class="cdc-mod-num done">✓</span><div class="cdc-mod-info"><strong>Module 2: Thinking Like an Economist</strong><span>Models, trade-offs, marginal analysis</span></div><span class="cdc-mod-meta">15 min · <span style="color:var(--emerald)">Done</span></span></div>
-        <div class="cdc-mod current" onclick="haptic();goPage('player')" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();haptic();goPage('player')}"><span class="cdc-mod-num active">3</span><div class="cdc-mod-info"><strong>Module 3: Supply & Demand</strong><span>Markets, equilibrium, price changes</span></div><span class="cdc-mod-meta">18 min · <span style="color:var(--accent)">Current</span></span></div>
-        <div class="cdc-mod"><span class="cdc-mod-num">4</span><div class="cdc-mod-info"><strong>Module 4: Elasticity</strong><span>Price sensitivity, elastic vs inelastic</span></div><span class="cdc-mod-meta">14 min · Locked</span></div>
+        <div class="cdc-mod current" id="mod3Row" onclick="haptic();goPage('player')" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();haptic();goPage('player')}"><span class="cdc-mod-num active" id="mod3Num">3</span><div class="cdc-mod-info"><strong>Module 3: Supply & Demand</strong><span>Markets, equilibrium, price changes</span></div><span class="cdc-mod-meta" id="mod3Meta">18 min · <span style="color:var(--accent)">Current</span></span></div>
+        <div class="cdc-mod" id="mod4Row"><span class="cdc-mod-num" id="mod4Num">4</span><div class="cdc-mod-info"><strong>Module 4: Elasticity</strong><span>Price sensitivity, elastic vs inelastic</span></div><span class="cdc-mod-meta" id="mod4Meta">14 min · Locked</span></div>
         <div class="cdc-mod"><span class="cdc-mod-num">5</span><div class="cdc-mod-info"><strong>Module 5: Market Structures</strong><span>Competition, monopoly, oligopoly</span></div><span class="cdc-mod-meta">16 min · Locked</span></div>
         <div class="cdc-mod"><span class="cdc-mod-num">6</span><div class="cdc-mod-info"><strong>Module 6: Government & Markets</strong><span>Taxes, subsidies, price controls</span></div><span class="cdc-mod-meta">18 min · Locked</span></div>
       </div>
-      <div class="cdc-footer"><span style="font-size:.72rem;color:var(--text-muted)">Module 3 in progress</span><button class="cc-continue" onclick="haptic();goPage('player')">Continue</button></div>
+      <div class="cdc-footer" id="cdcFooter"><span style="font-size:.72rem;color:var(--text-muted)" id="cdcFooterLabel">Module 3 in progress</span><button class="cc-continue" id="cdcFooterBtn" onclick="haptic();goPage('player')">Continue</button></div>
     </div>
   </div>
 </div>
@@ -760,7 +761,7 @@ body.dark .mic-btn{background:rgba(96,165,250,.5);border-color:rgba(255,255,255,
       <div class="vid-container anim" id="vidContainer">
         <video id="lessonVideo" preload="auto" playsinline aria-label="Module 3: Supply and Demand lesson video"><source src="econvid.mp4" type="video/mp4"><track id="subTrack" src="subtitles.vtt" kind="subtitles" srclang="en" label="English">Your browser does not support the video tag.</video>
         <div class="vid-click-layer" id="vidClickLayer"></div>
-        <div class="vid-ph" id="vidPlaceholder"><button class="play-btn btn-liquid" id="playBtn" onclick="haptic();startVideo()" aria-label="Play video">▶</button><div style="position:absolute;bottom:18px;left:0;right:0;text-align:center;z-index:2;font-size:.78rem;color:var(--text-secondary);font-weight:500">3.2 — Supply & Demand</div></div>
+        <div class="vid-ph" id="vidPlaceholder"><button class="play-btn btn-liquid" id="playBtn" onclick="haptic();startVideo()" aria-label="Play video">▶</button><div style="position:absolute;bottom:18px;left:0;right:0;text-align:center;z-index:2;font-size:.78rem;color:var(--text-secondary);font-weight:500">3 — Supply & Demand</div></div>
         <div class="vid-error" id="vidError" style="display:none" role="alert"><div style="font-size:1.5rem;margin-bottom:8px" aria-hidden="true">⚠</div><div>Video failed to load</div><div style="font-size:.75rem;color:var(--text-muted);margin-top:4px" id="vidErrorDetail">Check that econvid.mp4 is in the same folder as this file.</div></div>
         <div class="seek-lock-msg" id="seekLockMsg" role="alert" aria-live="assertive">Complete the current checkpoint before skipping ahead.</div>
         <div class="vid-context-menu" id="vidContextMenu">
@@ -806,18 +807,18 @@ body.dark .mic-btn{background:rgba(96,165,250,.5);border-color:rgba(255,255,255,
       <div class="sic anim d2"><div style="width:36px;height:36px;border-radius:9px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--accent);flex-shrink:0">OBJ</div><div><h3>Learning Objective</h3><p>Understand how supply and demand interact to determine market prices, and how shifts in either curve affect equilibrium.</p></div></div>
     </div>
     <aside class="p-sidebar">
-      <div class="sb-header">Section 3.2 — Key Concepts</div>
-      <div class="sb-scroll">
-        <div class="nc"><h4>Demand</h4><p>The quantity of a good that consumers are willing and able to buy at various prices. As price rises, quantity demanded typically falls (law of demand).</p></div>
-        <div class="nc"><h4>Supply</h4><p>The quantity of a good that producers are willing and able to sell at various prices. As price rises, quantity supplied typically increases (law of supply).</p></div>
-        <div class="nc"><h4>Equilibrium</h4><p>The point where supply equals demand. At this price, the market clears — there is no surplus or shortage.</p></div>
-        <div class="nc"><h4>Shifts</h4><p>Changes in factors other than price (income, preferences, costs) shift the entire supply or demand curve, creating a new equilibrium.</p></div>
+      <div class="sb-header" id="sbHeader">Module 3 — Key Concepts</div>
+      <div class="sb-scroll" id="sbScroll">
+        <div class="nc" id="kcSection1"><h4>3.1 The Law of Demand</h4><p>The demand curve shows an <strong>inverse relationship</strong> between price and quantity demanded. Three reasons drive this: the <strong>substitution effect</strong> (consumers switch to alternatives when price rises), the <strong>income effect</strong> (higher prices reduce purchasing power), and <strong>diminishing marginal utility</strong> (each additional unit gives less satisfaction).</p></div>
+        <div class="nc" id="kcSection2"><h4>3.2 Demand Shifters</h4><p>Five factors shift the entire demand curve (not movement along it): <strong>taste &amp; preferences</strong>, <strong>number of consumers</strong>, <strong>price of substitutes &amp; complements</strong>, <strong>income</strong> (normal goods vs inferior goods), and <strong>expectations</strong> about future prices. Price of the good itself only moves along the curve.</p></div>
+        <div class="nc" id="kcSection3"><h4>3.3 Supply &amp; Its Shifters</h4><p>The supply curve shows a <strong>positive relationship</strong> between price and quantity supplied — higher prices mean more profit, so producers supply more. Five shifters move the curve: <strong>input costs</strong>, <strong>technology</strong>, <strong>government action</strong> (taxes, subsidies, regulation), <strong>number of sellers</strong>, and <strong>expectations</strong>.</p></div>
+        <div class="nc" id="kcSection4"><h4>3.4 Equilibrium &amp; Applications</h4><p><strong>Equilibrium</strong> is where supply meets demand — the market-clearing price with no surplus or shortage. Below equilibrium there's a <strong>shortage</strong>; above it, a <strong>surplus</strong>. In a free market, prices naturally return to equilibrium. Use supply &amp; demand graphs to predict how shifts affect price and quantity.</p></div>
       </div>
-      <div class="mod-sections"><h4>Sections</h4><div class="sec-list">
-        <div class="sec-item completed"><span class="sec-dot"></span>3.1 What Is a Market?<span class="sec-time">4:12</span></div>
-        <div class="sec-item active"><span class="sec-dot"></span>3.2 Supply & Demand<span class="sec-time">6:30</span></div>
-        <div class="sec-item"><span class="sec-dot"></span>3.3 Equilibrium & Price<span class="sec-time">5:45</span></div>
-        <div class="sec-item"><span class="sec-dot"></span>3.4 Shifts & Elasticity<span class="sec-time">4:58</span></div>
+      <div class="mod-sections"><h4>Sections</h4><div class="sec-list" id="secList">
+        <div class="sec-item" data-sec-start="0" data-sec-end="100" onclick="seekToSection(0)"><span class="sec-dot"></span>3.1 The Law of Demand<span class="sec-time">0:00</span></div>
+        <div class="sec-item" data-sec-start="100" data-sec-end="207" onclick="seekToSection(100)"><span class="sec-dot"></span>3.2 Demand Shifters<span class="sec-time">1:40</span></div>
+        <div class="sec-item" data-sec-start="207" data-sec-end="319" onclick="seekToSection(207)"><span class="sec-dot"></span>3.3 Supply &amp; Its Shifters<span class="sec-time">3:27</span></div>
+        <div class="sec-item" data-sec-start="319" data-sec-end="9999" onclick="seekToSection(319)"><span class="sec-dot"></span>3.4 Equilibrium &amp; Applications<span class="sec-time">5:19</span></div>
       </div></div>
     </aside>
   </div>
@@ -906,6 +907,28 @@ body.dark .mic-btn{background:rgba(96,165,250,.5);border-color:rgba(255,255,255,
         <label for="textFallbackAlways" class="sr-only">Type your explanation</label>
         <textarea id="textFallbackAlways" aria-label="Type your explanation" style="width:100%;min-height:64px;max-height:120px;padding:10px 12px;border:1px solid var(--border-subtle);border-radius:var(--r-md);background:var(--bg-input);color:var(--text-primary);font-family:var(--font-body);font-size:.82rem;resize:none;outline:none;overflow-y:auto" placeholder="Type your explanation here..."></textarea>
         <button class="btn-primary btn-liquid btn-shine" onclick="haptic();submitTextAlways()" style="font-size:.78rem;padding:10px;margin-top:6px">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODULE 4 ═══ -->
+<div class="page" id="pageModule4">
+  <nav class="topnav" aria-label="Module 4 navigation"><div class="topnav-left"><button class="topnav-brand" onclick="goPage('home')" aria-label="Refero home"><div class="logo-mark" aria-hidden="true"><svg viewBox="0 0 28 14" width="18" height="9" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zM21 7c0-2.8-2.2-5-5-5s-5 2.2-5 5 2.2 5 5 5 5-2.2 5-5z"/></svg></div><span>refero</span></button><div class="topnav-links"><button class="topnav-link" onclick="goPage('home')">Home</button><button class="topnav-link" onclick="goPage('landing')">Course</button><button class="topnav-link active">Module 4</button></div></div><div class="topnav-right"><button class="topnav-link" onclick="openSettings()" aria-label="Open settings">Settings</button><span class="avatar" aria-label="User profile: Gibran">G</span></div></nav>
+  <div style="padding:36px;max-width:780px;margin:0 auto">
+    <button class="btn-secondary btn-shine" onclick="haptic();goPage('courses')" style="font-size:.78rem;margin-bottom:24px">Back to Modules</button>
+    <h1 style="font-family:var(--font-display);font-size:1.8rem;font-weight:700;margin-bottom:6px">Module 4: Elasticity</h1>
+    <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:28px">14 min · Price sensitivity, elastic vs inelastic</p>
+    <div style="background:var(--glass-bg);backdrop-filter:var(--glass-blur);border:1px solid var(--glass-border);border-radius:var(--r-lg);padding:28px 32px">
+      <h2 style="font-family:var(--font-display);font-size:1.15rem;font-weight:700;margin-bottom:16px">Understanding Elasticity</h2>
+      <div style="font-size:.9rem;line-height:1.75;color:var(--text-primary)">
+        <p>Elasticity measures how sensitive one economic variable is to changes in another. The most common form, <strong>price elasticity of demand</strong>, captures how much the quantity demanded changes when the price of a good rises or falls.</p>
+        <p style="margin-top:14px">When demand is <strong>elastic</strong> (elasticity greater than 1), a small change in price leads to a proportionally larger change in quantity demanded. Goods with many substitutes — like a specific brand of cereal — tend to be elastic because consumers can easily switch to alternatives.</p>
+        <p style="margin-top:14px">When demand is <strong>inelastic</strong> (elasticity less than 1), quantity demanded barely budges even when prices swing. Necessities like gasoline, insulin, and electricity are classic examples — people need them regardless of cost.</p>
+        <p style="margin-top:14px"><strong>Unit elastic</strong> demand (elasticity equal to 1) means the percentage change in quantity exactly matches the percentage change in price. Total revenue stays constant whether prices rise or fall.</p>
+        <p style="margin-top:14px">Elasticity matters because it determines how price changes affect total revenue. If demand is elastic, raising prices actually <em>decreases</em> revenue because the drop in quantity outweighs the higher price. If demand is inelastic, raising prices <em>increases</em> revenue because customers keep buying nearly the same amount.</p>
+        <p style="margin-top:14px">The same concept applies on the supply side. <strong>Price elasticity of supply</strong> measures how responsive producers are to price changes. Industries with flexible production — like digital goods — have highly elastic supply, while industries with long lead times — like agriculture or oil drilling — tend to be inelastic in the short run.</p>
+        <p style="margin-top:14px;padding:14px 18px;background:var(--accent-soft);border-radius:var(--r-md);font-weight:500;color:var(--accent)">This module's video lesson and mastery checkpoints are coming soon. For now, review the passage above to prepare for the full experience.</p>
       </div>
     </div>
   </div>
@@ -1254,8 +1277,8 @@ function submitTextAlways(){
 
 /* ── Page Navigation (with slide transition) ── */
 function goPage(id){
-  const map = {home:'pageHome',landing:'pageCourseLanding',courses:'pageCourses',player:'pagePlayer'};
-  const names = {home:'Home',landing:'Course Overview',courses:'My Courses',player:'Lesson Player'};
+  const map = {home:'pageHome',landing:'pageCourseLanding',courses:'pageCourses',player:'pagePlayer',module4:'pageModule4'};
+  const names = {home:'Home',landing:'Course Overview',courses:'My Courses',player:'Lesson Player',module4:'Module 4: Elasticity'};
   const el = document.getElementById(map[id]);
   if(!el) return;
   document.querySelectorAll('.page').forEach(p => {p.classList.remove('active');p.style.animation='none'});
@@ -1387,10 +1410,52 @@ function updateCaptions(){
   });
 }
 
+/* ── Section tracking — highlights active section & key concept card ── */
+let currentSection = -1;
+function updateSectionHighlight(){
+  const list = document.getElementById('secList');
+  if(!list) return;
+  const t = video.currentTime;
+  const items = list.querySelectorAll('.sec-item');
+  let secIdx = -1;
+  items.forEach((item,i) => {
+    const s = +item.dataset.secStart, e = +item.dataset.secEnd;
+    if(t >= s && t < e) secIdx = i;
+  });
+  if(secIdx === currentSection) return;
+  currentSection = secIdx;
+  items.forEach((item,i) => item.classList.toggle('active', i === secIdx));
+  // Highlight matching key concept card
+  const kcIds = ['kcSection1','kcSection2','kcSection3','kcSection4'];
+  kcIds.forEach((id,i) => {
+    const el = document.getElementById(id);
+    if(el) el.classList.toggle('nc-active', i === secIdx);
+  });
+  // Update sidebar header
+  const hdr = document.getElementById('sbHeader');
+  if(hdr && secIdx >= 0){
+    const names = ['3.1 The Law of Demand','3.2 Demand Shifters','3.3 Supply & Its Shifters','3.4 Equilibrium & Applications'];
+    hdr.textContent = names[secIdx] + ' — Key Concepts';
+  }
+  // Scroll active key concept into view
+  if(secIdx >= 0){
+    const activeKc = document.getElementById(kcIds[secIdx]);
+    if(activeKc) activeKc.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+}
+
+function seekToSection(time){
+  haptic();
+  if(video.paused && !video.currentTime) return; // video hasn't started
+  const allowed = getMaxAllowedTime();
+  if(time <= allowed){ video.currentTime = time; }
+}
+
 /* ═══════════════════════════════════════════
    VIDEO PLAYER + GATED MASTERY CHECKPOINT SYSTEM
    ═══════════════════════════════════════════ */
 const video = document.getElementById('lessonVideo');
+let module4Unlocked = false;
 let compPct=0, knowPct=0, currentCheckpoint=0, rewatching=false;
 let maxWatchedTime = 0; // tracks the furthest legitimately-reached time
 let seekLockTimeout = null;
@@ -1441,6 +1506,10 @@ function initPlayer(){
   const fill=document.getElementById('cpBarFill'); if(fill) fill.style.width='0%';
   const rb=document.getElementById('remedBar'); if(rb) rb.classList.remove('visible');
   lastCueStart=-1;
+  currentSection=-1;
+  document.querySelectorAll('.sec-item').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nc').forEach(c=>c.classList.remove('nc-active'));
+  const sbH=document.getElementById('sbHeader'); if(sbH) sbH.textContent='Module 3 — Key Concepts';
   const cl=document.getElementById('capLine'); if(cl) cl.innerHTML='<span class="cap-empty">Play the video to see captions.</span>';
   // Sync cp-bar border-radius with current caption visibility state
   document.getElementById('cpBar').classList.toggle('cap-open', captionsOn);
@@ -1596,6 +1665,7 @@ function onTimeUpdate(){
   updateMetrics();
   updateCpBarFill();
   updateCaptions();
+  updateSectionHighlight();
   // Check for checkpoint triggers — scan ALL to handle retry of any checkpoint
   for(let i=0; i<checkpoints.length; i++){
     if(!cpState[i].mastered && video.currentTime >= checkpoints[i].time - 0.5){
@@ -1802,6 +1872,8 @@ function closeFeynman(){
 
   if(lastTutorScore >= 7){
     // Passed — unlock next module
+    module4Unlocked = true;
+    unlockModule4();
     goPage('courses');
   } else {
     // Failed mastery gate — force section redo
@@ -1839,6 +1911,40 @@ function closeRedoGate(){
   if(ov) ov.remove();
   // Reset and restart the lesson
   goPage('player');
+}
+
+function unlockModule4(){
+  // Mark Module 3 as done
+  const mod3Row = document.getElementById('mod3Row');
+  if(mod3Row){
+    mod3Row.classList.remove('current');
+    mod3Row.removeAttribute('onclick');
+    mod3Row.removeAttribute('tabindex');
+    mod3Row.removeAttribute('role');
+    mod3Row.removeAttribute('onkeydown');
+  }
+  const mod3Num = document.getElementById('mod3Num');
+  if(mod3Num){ mod3Num.className='cdc-mod-num done'; mod3Num.textContent='✓'; }
+  const mod3Meta = document.getElementById('mod3Meta');
+  if(mod3Meta) mod3Meta.innerHTML='18 min · <span style="color:var(--emerald)">Done</span>';
+  // Unlock Module 4
+  const mod4Row = document.getElementById('mod4Row');
+  if(mod4Row){
+    mod4Row.classList.add('current');
+    mod4Row.setAttribute('onclick',"haptic();goPage('module4')");
+    mod4Row.setAttribute('tabindex','0');
+    mod4Row.setAttribute('role','button');
+    mod4Row.setAttribute('onkeydown',"if(event.key==='Enter'||event.key===' '){event.preventDefault();haptic();goPage('module4')}");
+  }
+  const mod4Num = document.getElementById('mod4Num');
+  if(mod4Num){ mod4Num.className='cdc-mod-num active'; }
+  const mod4Meta = document.getElementById('mod4Meta');
+  if(mod4Meta) mod4Meta.innerHTML='14 min · <span style="color:var(--accent)">Current</span>';
+  // Update footer
+  const footerLabel = document.getElementById('cdcFooterLabel');
+  if(footerLabel) footerLabel.textContent='Module 4 unlocked';
+  const footerBtn = document.getElementById('cdcFooterBtn');
+  if(footerBtn){ footerBtn.textContent='Go to Module 4'; footerBtn.setAttribute('onclick',"haptic();goPage('module4')"); }
 }
 
 function renderTutorProgress(){

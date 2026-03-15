@@ -106,7 +106,8 @@ body.dark .orb.a{background:rgba(30,58,138,.25)} body.dark .orb.b{background:rgb
 .card-shell::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#2563eb,#3b82f6,#0ea5e9);border-radius:var(--r-xl) var(--r-xl) 0 0}
 .card-shell.wide{max-width:580px}
 .logo-row{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:24px}
-.logo-mark{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#1e40af,#3b82f6);display:flex;align-items:center;justify-content:center;font-size:16px;color:white;font-weight:800}
+.logo-mark{width:36px;height:36px;border-radius:10px;overflow:hidden;flex-shrink:0}
+.logo-mark img{width:100%;height:100%;object-fit:cover}
 .logo-word{font-weight:700;font-size:1.3rem;letter-spacing:-.03em}
 .card-title{font-family:var(--font-display);font-size:1.45rem;font-weight:700;margin-bottom:6px;letter-spacing:-.01em}
 .card-sub{font-size:.88rem;color:var(--text-secondary);margin-bottom:28px;line-height:1.55}
@@ -219,7 +220,7 @@ body.dark .btn-shine:hover::before{background-position:-100% 0}
 .topnav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:58px;background:var(--lg-bg-heavy);backdrop-filter:var(--lg-blur);-webkit-backdrop-filter:var(--lg-blur);border-bottom:1px solid var(--lg-border);box-shadow:var(--lg-shadow)}
 .topnav-left{display:flex;align-items:center;gap:24px}
 .topnav-brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:1.1rem;letter-spacing:-.03em;cursor:pointer;background:none;border:none;color:var(--text-primary);padding:4px}
-.topnav-brand .logo-mark{width:28px;height:28px;border-radius:8px;font-size:13px}
+.topnav-brand .logo-mark{width:28px;height:28px;border-radius:8px}
 .topnav-links{display:flex;gap:5px}
 .topnav-link{padding:7px 16px;border:none;background:transparent;color:var(--text-secondary);font-size:.8rem;font-weight:500;border-radius:var(--r-full);transition:all .25s var(--ease-out)}
 .topnav-link:hover{color:var(--text-primary);background:var(--accent-soft)}
@@ -503,7 +504,7 @@ body.dark .t-msg.user{background:rgba(255,255,255,.05)}
 /* ── Course Landing Page ── */
 .course-landing-hero{position:relative;min-height:340px;background:linear-gradient(135deg,#1e3a5f,#162544,#0f172a);border-radius:0 0 var(--r-xl) var(--r-xl);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:36px 40px 32px}
 .course-landing-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(15,23,42,.75) 0%,rgba(15,23,42,.25) 50%,rgba(15,23,42,.05) 100%);pointer-events:none;z-index:1}
-.course-landing-hero *{position:relative;z-index:1}
+.course-landing-hero *{position:relative;z-index:2}
 .clh-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:var(--r-full);background:rgba(255,255,255,.12);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.15);color:white;font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;width:fit-content}
 .clh-title{font-family:var(--font-display);font-size:2rem;font-weight:700;color:white;line-height:1.2;letter-spacing:-.02em;margin-bottom:6px}
 .clh-org{font-size:.85rem;color:rgba(255,255,255,.7);margin-bottom:18px}
@@ -512,9 +513,9 @@ body.dark .t-msg.user{background:rgba(255,255,255,.05)}
 .clh-stat-val{font-size:1.1rem;font-weight:700}
 .clh-stat-label{font-size:.62rem;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
 .clh-actions{display:flex;gap:10px;flex-wrap:wrap}
-.clh-actions .btn-primary{width:auto;padding:13px 28px;min-width:180px}
-.clh-actions .btn-secondary{width:auto;padding:12px 24px;min-width:140px;background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:white;backdrop-filter:blur(12px)}
-.clh-actions .btn-secondary:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.3)}
+.clh-hero-btn{transition:background .2s,transform .2s,box-shadow .2s}
+.clh-hero-btn:hover{background:#1d4ed8 !important;transform:translateY(-2px);box-shadow:0 6px 20px rgba(37,99,235,.4)}
+.clh-hero-btn:active{transform:scale(0.96);transition:transform .08s}
 .course-landing-body{padding:28px 40px 40px}
 .clb-section{margin-bottom:24px}
 .clb-section h3{font-family:var(--font-display);font-size:1rem;font-weight:700;margin-bottom:12px}
@@ -657,7 +658,7 @@ body.dark .mic-btn{background:rgba(96,165,250,.5);border-color:rgba(255,255,255,
 
 <!-- ═══ HOME ═══ -->
 <div class="page active" id="pageHome">
-  <nav class="topnav" aria-label="Main navigation"><div class="topnav-left"><button class="topnav-brand" onclick="goPage('home')" aria-label="Refero home"><div class="logo-mark" aria-hidden="true"><svg viewBox="0 0 28 14" width="18" height="9" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zM21 7c0-2.8-2.2-5-5-5s-5 2.2-5 5 2.2 5 5 5 5-2.2 5-5z"/></svg></div><span>refero</span></button><div class="topnav-links" role="tablist"><button class="topnav-link active" onclick="goPage('home')" role="tab" aria-selected="true">Home</button><button class="topnav-link" onclick="goPage('landing')" role="tab" aria-selected="false">Course</button></div></div><div class="topnav-right"><button class="topnav-link" onclick="openSettings()" aria-label="Open settings">Settings</button><span class="avatar" aria-label="User profile: Gibran">G</span></div></nav>
+  <nav class="topnav" aria-label="Main navigation"><div class="topnav-left"><button class="topnav-brand" onclick="goPage('home')" aria-label="Refero home"><div class="logo-mark" aria-hidden="true"><img src="referologo.png" alt="Refero logo"></div><span>refero</span></button><div class="topnav-links" role="tablist"><button class="topnav-link active" onclick="goPage('home')" role="tab" aria-selected="true">Home</button><button class="topnav-link" onclick="goPage('landing')" role="tab" aria-selected="false">Course</button></div></div><div class="topnav-right"><button class="topnav-link" onclick="openSettings()" aria-label="Open settings">Settings</button><span class="avatar" aria-label="User profile: Gibran">G</span></div></nav>
   <main id="main-content">
   <section class="home-hero anim"><div><h1 aria-label="Welcome back, Gibran"><span id="heroTyping"></span><span class="typing-cursor" id="heroCursor"></span></h1><p>Keep building momentum — mastery is about depth, not speed.</p></div>
     <div class="hero-stats"><div class="hero-stat anim d1"><div class="hs-val" style="color:var(--accent)">73%</div><div class="hs-label">Avg Mastery</div></div><div class="hero-stat anim d2"><div class="hs-val" style="color:var(--emerald)">12</div><div class="hs-label">Day Streak</div></div><div class="hero-stat anim d3"><div class="hs-val" style="color:var(--amber)">1</div><div class="hs-label">Course</div></div></div>
@@ -675,7 +676,7 @@ body.dark .mic-btn{background:rgba(96,165,250,.5);border-color:rgba(255,255,255,
 
 <!-- ═══ COURSE LANDING PAGE ═══ -->
 <div class="page" id="pageCourseLanding">
-  <nav class="topnav" aria-label="Course navigation"><div class="topnav-left"><button class="topnav-brand" onclick="goPage('home')" aria-label="Refero home"><div class="logo-mark" aria-hidden="true"><svg viewBox="0 0 28 14" width="18" height="9" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zM21 7c0-2.8-2.2-5-5-5s-5 2.2-5 5 2.2 5 5 5 5-2.2 5-5z"/></svg></div><span>refero</span></button><div class="topnav-links"><button class="topnav-link" onclick="goPage('home')">Home</button><button class="topnav-link active" onclick="goPage('landing')">Course</button></div></div><div class="topnav-right"><button class="topnav-link" onclick="openSettings()" aria-label="Open settings">Settings</button><span class="avatar" aria-label="User profile: Gibran">G</span></div></nav>
+  <nav class="topnav" aria-label="Course navigation"><div class="topnav-left"><button class="topnav-brand" onclick="goPage('home')" aria-label="Refero home"><div class="logo-mark" aria-hidden="true"><img src="referologo.png" alt="Refero logo"></div><span>refero</span></button><div class="topnav-links"><button class="topnav-link" onclick="goPage('home')">Home</button><button class="topnav-link active" onclick="goPage('landing')">Course</button></div></div><div class="topnav-right"><button class="topnav-link" onclick="openSettings()" aria-label="Open settings">Settings</button><span class="avatar" aria-label="User profile: Gibran">G</span></div></nav>
   <div class="course-landing-hero">
     <div class="ethereal-bg"><div class="eth-layer"><div class="eth-color"></div></div><div class="eth-noise"></div></div>
     <div class="clh-badge">Econ Academy · Beginner</div>
@@ -687,8 +688,7 @@ body.dark .mic-btn{background:rgba(96,165,250,.5);border-color:rgba(255,255,255,
       <div class="clh-stat"><div class="clh-stat-val" style="color:#fbbf24">3/6</div><div class="clh-stat-label">Modules</div></div>
     </div>
     <div class="clh-actions">
-      <button class="btn-primary btn-liquid btn-shine btn-no-hover" onclick="haptic();goPage('player')" aria-label="Continue current lesson">Continue Lesson</button>
-      <button class="btn-secondary btn-shine btn-no-hover" onclick="haptic();goPage('courses')" aria-label="View all modules">View Modules</button>
+      <button class="clh-hero-btn" onclick="haptic();goPage('player')" aria-label="Continue current lesson" style="padding:13px 32px;font-size:.92rem;font-weight:700;border:none;border-radius:999px;background:#2563eb;color:#ffffff;cursor:pointer">Continue Lesson</button>
     </div>
   </div>
   <div class="course-landing-body">
@@ -702,14 +702,14 @@ body.dark .mic-btn{background:rgba(96,165,250,.5);border-color:rgba(255,255,255,
       </div>
     </div>
     <div class="clb-section">
-      <h3>Current Module</h3>
-      <div style="display:flex;align-items:center;gap:16px;padding:16px 18px;background:var(--accent-soft);border:1px solid rgba(59,130,246,.15);border-radius:var(--lg-radius-sm)">
-        <div style="width:40px;height:40px;border-radius:10px;background:var(--accent);color:white;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0">3</div>
-        <div style="flex:1">
-          <div style="font-weight:600;font-size:.9rem">Module 3: Supply & Demand</div>
-          <div style="font-size:.75rem;color:var(--text-secondary);margin-top:2px">Markets, equilibrium, price changes · 18 min</div>
-        </div>
-        <button class="cc-continue" onclick="haptic();goPage('player')" style="flex-shrink:0">Start Lesson</button>
+      <h3>Modules</h3>
+      <div class="cdc-modules" style="border:1px solid var(--border-subtle);border-radius:var(--r-lg);overflow:hidden">
+        <div class="cdc-mod"><span class="cdc-mod-num done">✓</span><div class="cdc-mod-info"><strong>Module 1: What Is Economics?</strong><span>Scarcity, choice, opportunity cost</span></div><span class="cdc-mod-meta">12 min · <span style="color:var(--emerald)">Done</span></span></div>
+        <div class="cdc-mod"><span class="cdc-mod-num done">✓</span><div class="cdc-mod-info"><strong>Module 2: Thinking Like an Economist</strong><span>Models, trade-offs, marginal analysis</span></div><span class="cdc-mod-meta">15 min · <span style="color:var(--emerald)">Done</span></span></div>
+        <div class="cdc-mod current" id="clMod3Row" onclick="haptic();goPage('player')" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();haptic();goPage('player')}"><span class="cdc-mod-num active" id="clMod3Num">3</span><div class="cdc-mod-info"><strong>Module 3: Supply & Demand</strong><span>Markets, equilibrium, price changes</span></div><span class="cdc-mod-meta" id="clMod3Meta">18 min · <span style="color:var(--accent)">Current</span></span></div>
+        <div class="cdc-mod" id="clMod4Row"><span class="cdc-mod-num" id="clMod4Num">4</span><div class="cdc-mod-info"><strong>Module 4: Elasticity</strong><span>Price sensitivity, elastic vs inelastic</span></div><span class="cdc-mod-meta" id="clMod4Meta">14 min · Locked</span></div>
+        <div class="cdc-mod"><span class="cdc-mod-num">5</span><div class="cdc-mod-info"><strong>Module 5: Market Structures</strong><span>Competition, monopoly, oligopoly</span></div><span class="cdc-mod-meta">16 min · Locked</span></div>
+        <div class="cdc-mod"><span class="cdc-mod-num">6</span><div class="cdc-mod-info"><strong>Module 6: Government & Markets</strong><span>Taxes, subsidies, price controls</span></div><span class="cdc-mod-meta">18 min · Locked</span></div>
       </div>
     </div>
   </div>
@@ -717,7 +717,7 @@ body.dark .mic-btn{background:rgba(96,165,250,.5);border-color:rgba(255,255,255,
 
 <!-- ═══ MY COURSES ═══ -->
 <div class="page" id="pageCourses">
-  <nav class="topnav" aria-label="Courses navigation"><div class="topnav-left"><button class="topnav-brand" onclick="goPage('home')" aria-label="Refero home"><div class="logo-mark" aria-hidden="true"><svg viewBox="0 0 28 14" width="18" height="9" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zM21 7c0-2.8-2.2-5-5-5s-5 2.2-5 5 2.2 5 5 5 5-2.2 5-5z"/></svg></div><span>refero</span></button><div class="topnav-links"><button class="topnav-link" onclick="goPage('home')">Home</button><button class="topnav-link active" onclick="goPage('landing')">Course</button></div></div><div class="topnav-right"><button class="topnav-link" onclick="openSettings()" aria-label="Open settings">Settings</button><span class="avatar" aria-label="User profile: Gibran">G</span></div></nav>
+  <nav class="topnav" aria-label="Courses navigation"><div class="topnav-left"><button class="topnav-brand" onclick="goPage('home')" aria-label="Refero home"><div class="logo-mark" aria-hidden="true"><img src="referologo.png" alt="Refero logo"></div><span>refero</span></button><div class="topnav-links"><button class="topnav-link" onclick="goPage('home')">Home</button><button class="topnav-link active" onclick="goPage('landing')">Course</button></div></div><div class="topnav-right"><button class="topnav-link" onclick="openSettings()" aria-label="Open settings">Settings</button><span class="avatar" aria-label="User profile: Gibran">G</span></div></nav>
   <div style="padding:36px">
     <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:24px"><h1 style="font-family:var(--font-display);font-size:1.8rem;font-weight:700">Introduction to Economics</h1><span style="font-size:.78rem;color:var(--text-muted)">1 course enrolled</span></div>
     <div class="courses-detail-card anim">
@@ -750,7 +750,7 @@ body.dark .mic-btn{background:rgba(96,165,250,.5);border-color:rgba(255,255,255,
 
 <!-- ═══ PLAYER ═══ -->
 <div class="page" id="pagePlayer">
-  <nav class="topnav" aria-label="Lesson navigation"><div class="topnav-left"><button class="topnav-brand" onclick="goPage('home')" aria-label="Refero home"><div class="logo-mark" aria-hidden="true"><svg viewBox="0 0 28 14" width="18" height="9" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zM21 7c0-2.8-2.2-5-5-5s-5 2.2-5 5 2.2 5 5 5 5-2.2 5-5z"/></svg></div><span>refero</span></button><div class="topnav-links"><button class="topnav-link" onclick="goPage('home')">Home</button><button class="topnav-link" onclick="goPage('landing')">Course</button><button class="topnav-link active">Lesson</button></div></div><div class="topnav-right"><button class="topnav-link" onclick="openSettings()" aria-label="Open settings">Settings</button><span class="avatar" aria-label="User profile: Gibran">G</span></div></nav>
+  <nav class="topnav" aria-label="Lesson navigation"><div class="topnav-left"><button class="topnav-brand" onclick="goPage('home')" aria-label="Refero home"><div class="logo-mark" aria-hidden="true"><img src="referologo.png" alt="Refero logo"></div><span>refero</span></button><div class="topnav-links"><button class="topnav-link" onclick="goPage('home')">Home</button><button class="topnav-link" onclick="goPage('landing')">Course</button><button class="topnav-link active">Lesson</button></div></div><div class="topnav-right"><button class="topnav-link" onclick="openSettings()" aria-label="Open settings">Settings</button><span class="avatar" aria-label="User profile: Gibran">G</span></div></nav>
   <div class="comp-strip" role="region" aria-label="Lesson progress">
     <div class="cm"><span class="cm-label" id="cBarLabel">Completion</span><div class="cm-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-labelledby="cBarLabel" id="cBarTrack"><div class="cm-fill comp" id="cBar" style="width:0%"></div></div><span class="cm-val" id="cVal">0%</span></div>
     <div class="cm"><span class="cm-label" id="kBarLabel">Mastery</span><div class="cm-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-labelledby="kBarLabel" id="kBarTrack"><div class="cm-fill know" id="kBar" style="width:0%"></div></div><span class="cm-val" id="kVal">0%</span></div>
@@ -914,7 +914,7 @@ body.dark .mic-btn{background:rgba(96,165,250,.5);border-color:rgba(255,255,255,
 
 <!-- ═══ MODULE 4 ═══ -->
 <div class="page" id="pageModule4">
-  <nav class="topnav" aria-label="Module 4 navigation"><div class="topnav-left"><button class="topnav-brand" onclick="goPage('home')" aria-label="Refero home"><div class="logo-mark" aria-hidden="true"><svg viewBox="0 0 28 14" width="18" height="9" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zM21 7c0-2.8-2.2-5-5-5s-5 2.2-5 5 2.2 5 5 5 5-2.2 5-5z"/></svg></div><span>refero</span></button><div class="topnav-links"><button class="topnav-link" onclick="goPage('home')">Home</button><button class="topnav-link" onclick="goPage('landing')">Course</button><button class="topnav-link active">Module 4</button></div></div><div class="topnav-right"><button class="topnav-link" onclick="openSettings()" aria-label="Open settings">Settings</button><span class="avatar" aria-label="User profile: Gibran">G</span></div></nav>
+  <nav class="topnav" aria-label="Module 4 navigation"><div class="topnav-left"><button class="topnav-brand" onclick="goPage('home')" aria-label="Refero home"><div class="logo-mark" aria-hidden="true"><img src="referologo.png" alt="Refero logo"></div><span>refero</span></button><div class="topnav-links"><button class="topnav-link" onclick="goPage('home')">Home</button><button class="topnav-link" onclick="goPage('landing')">Course</button><button class="topnav-link active">Module 4</button></div></div><div class="topnav-right"><button class="topnav-link" onclick="openSettings()" aria-label="Open settings">Settings</button><span class="avatar" aria-label="User profile: Gibran">G</span></div></nav>
   <div style="padding:36px;max-width:780px;margin:0 auto">
     <button class="btn-secondary btn-shine" onclick="haptic();goPage('courses')" style="font-size:.78rem;margin-bottom:24px">Back to Modules</button>
     <h1 style="font-family:var(--font-display);font-size:1.8rem;font-weight:700;margin-bottom:6px">Module 4: Elasticity</h1>
@@ -1920,6 +1920,19 @@ function unlockModule4(){
   if(footerLabel) footerLabel.textContent='Module 4 unlocked';
   const footerBtn = document.getElementById('cdcFooterBtn');
   if(footerBtn){ footerBtn.textContent='Go to Module 4'; footerBtn.setAttribute('onclick',"haptic();goPage('module4')"); }
+  // Also update the course landing page module list
+  const clMod3Row = document.getElementById('clMod3Row');
+  if(clMod3Row){ clMod3Row.classList.remove('current'); clMod3Row.removeAttribute('onclick'); clMod3Row.removeAttribute('tabindex'); clMod3Row.removeAttribute('role'); clMod3Row.removeAttribute('onkeydown'); }
+  const clMod3Num = document.getElementById('clMod3Num');
+  if(clMod3Num){ clMod3Num.className='cdc-mod-num done'; clMod3Num.textContent='✓'; }
+  const clMod3Meta = document.getElementById('clMod3Meta');
+  if(clMod3Meta) clMod3Meta.innerHTML='18 min · <span style="color:var(--emerald)">Done</span>';
+  const clMod4Row = document.getElementById('clMod4Row');
+  if(clMod4Row){ clMod4Row.classList.add('current'); clMod4Row.setAttribute('onclick',"haptic();goPage('module4')"); clMod4Row.setAttribute('tabindex','0'); clMod4Row.setAttribute('role','button'); clMod4Row.setAttribute('onkeydown',"if(event.key==='Enter'||event.key===' '){event.preventDefault();haptic();goPage('module4')}"); }
+  const clMod4Num = document.getElementById('clMod4Num');
+  if(clMod4Num){ clMod4Num.className='cdc-mod-num active'; }
+  const clMod4Meta = document.getElementById('clMod4Meta');
+  if(clMod4Meta) clMod4Meta.innerHTML='14 min · <span style="color:var(--accent)">Current</span>';
 }
 
 function renderTutorProgress(){

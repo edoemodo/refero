@@ -225,8 +225,7 @@ body.dark .btn-shine:hover::before{background-position:-100% 0}
 .topnav-link:hover{color:var(--text-primary);background:var(--accent-soft)}
 .topnav-link.active{color:var(--accent);background:var(--accent-soft)}
 .topnav-right{display:flex;align-items:center;gap:12px}
-.avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--coral),var(--rose));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;cursor:pointer;border:2px solid transparent;transition:border-color .2s;padding:0}
-.avatar:hover{border-color:var(--accent)}
+.avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--coral),var(--rose));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;cursor:default;border:2px solid transparent;padding:0}
 
 /* ── Home ── */
 .home-hero{padding:42px 36px 32px;display:flex;align-items:flex-end;justify-content:space-between;gap:28px;flex-wrap:wrap}
@@ -657,7 +656,7 @@ body.dark .mic-btn{background:rgba(96,165,250,.5);border-color:rgba(255,255,255,
 
 <!-- ═══ HOME ═══ -->
 <div class="page active" id="pageHome">
-  <nav class="topnav" aria-label="Main navigation"><div class="topnav-left"><button class="topnav-brand" onclick="goPage('home')" aria-label="Refero home"><div class="logo-mark" aria-hidden="true"><svg viewBox="0 0 28 14" width="18" height="9" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zM21 7c0-2.8-2.2-5-5-5s-5 2.2-5 5 2.2 5 5 5 5-2.2 5-5z"/></svg></div><span>refero</span></button><div class="topnav-links" role="tablist"><button class="topnav-link active" onclick="goPage('home')" role="tab" aria-selected="true">Home</button><button class="topnav-link" onclick="goPage('landing')" role="tab" aria-selected="false">Course</button></div></div><div class="topnav-right"><button class="topnav-link" onclick="openSettings()" aria-label="Open settings">Settings</button><button class="avatar" onclick="openSettings()" aria-label="User menu">G</button></div></nav>
+  <nav class="topnav" aria-label="Main navigation"><div class="topnav-left"><button class="topnav-brand" onclick="goPage('home')" aria-label="Refero home"><div class="logo-mark" aria-hidden="true"><svg viewBox="0 0 28 14" width="18" height="9" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zM21 7c0-2.8-2.2-5-5-5s-5 2.2-5 5 2.2 5 5 5 5-2.2 5-5z"/></svg></div><span>refero</span></button><div class="topnav-links" role="tablist"><button class="topnav-link active" onclick="goPage('home')" role="tab" aria-selected="true">Home</button><button class="topnav-link" onclick="goPage('landing')" role="tab" aria-selected="false">Course</button></div></div><div class="topnav-right"><button class="topnav-link" onclick="openSettings()" aria-label="Open settings">Settings</button><span class="avatar" aria-label="User profile: Gibran">G</span></div></nav>
   <main id="main-content">
   <section class="home-hero anim"><div><h1 aria-label="Welcome back, Gibran"><span id="heroTyping"></span><span class="typing-cursor" id="heroCursor"></span></h1><p>Keep building momentum — mastery is about depth, not speed.</p></div>
     <div class="hero-stats"><div class="hero-stat anim d1"><div class="hs-val" style="color:var(--accent)">73%</div><div class="hs-label">Avg Mastery</div></div><div class="hero-stat anim d2"><div class="hs-val" style="color:var(--emerald)">12</div><div class="hs-label">Day Streak</div></div><div class="hero-stat anim d3"><div class="hs-val" style="color:var(--amber)">1</div><div class="hs-label">Course</div></div></div>
@@ -675,7 +674,7 @@ body.dark .mic-btn{background:rgba(96,165,250,.5);border-color:rgba(255,255,255,
 
 <!-- ═══ COURSE LANDING PAGE ═══ -->
 <div class="page" id="pageCourseLanding">
-  <nav class="topnav" aria-label="Course navigation"><div class="topnav-left"><button class="topnav-brand" onclick="goPage('home')" aria-label="Refero home"><div class="logo-mark" aria-hidden="true"><svg viewBox="0 0 28 14" width="18" height="9" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zM21 7c0-2.8-2.2-5-5-5s-5 2.2-5 5 2.2 5 5 5 5-2.2 5-5z"/></svg></div><span>refero</span></button><div class="topnav-links"><button class="topnav-link" onclick="goPage('home')">Home</button><button class="topnav-link active" onclick="goPage('landing')">Course</button></div></div><div class="topnav-right"><button class="topnav-link" onclick="openSettings()" aria-label="Open settings">Settings</button><button class="avatar" onclick="openSettings()" aria-label="User menu">G</button></div></nav>
+  <nav class="topnav" aria-label="Course navigation"><div class="topnav-left"><button class="topnav-brand" onclick="goPage('home')" aria-label="Refero home"><div class="logo-mark" aria-hidden="true"><svg viewBox="0 0 28 14" width="18" height="9" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zM21 7c0-2.8-2.2-5-5-5s-5 2.2-5 5 2.2 5 5 5 5-2.2 5-5z"/></svg></div><span>refero</span></button><div class="topnav-links"><button class="topnav-link" onclick="goPage('home')">Home</button><button class="topnav-link active" onclick="goPage('landing')">Course</button></div></div><div class="topnav-right"><button class="topnav-link" onclick="openSettings()" aria-label="Open settings">Settings</button><span class="avatar" aria-label="User profile: Gibran">G</span></div></nav>
   <div class="course-landing-hero">
     <div class="ethereal-bg"><div class="eth-layer"><div class="eth-color"></div></div><div class="eth-noise"></div></div>
     <div class="clh-badge">Econ Academy · Beginner</div>
@@ -717,7 +716,7 @@ body.dark .mic-btn{background:rgba(96,165,250,.5);border-color:rgba(255,255,255,
 
 <!-- ═══ MY COURSES ═══ -->
 <div class="page" id="pageCourses">
-  <nav class="topnav" aria-label="Courses navigation"><div class="topnav-left"><button class="topnav-brand" onclick="goPage('home')" aria-label="Refero home"><div class="logo-mark" aria-hidden="true"><svg viewBox="0 0 28 14" width="18" height="9" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zM21 7c0-2.8-2.2-5-5-5s-5 2.2-5 5 2.2 5 5 5 5-2.2 5-5z"/></svg></div><span>refero</span></button><div class="topnav-links"><button class="topnav-link" onclick="goPage('home')">Home</button><button class="topnav-link active" onclick="goPage('landing')">Course</button></div></div><div class="topnav-right"><button class="topnav-link" onclick="openSettings()" aria-label="Open settings">Settings</button><button class="avatar" onclick="openSettings()" aria-label="User menu">G</button></div></nav>
+  <nav class="topnav" aria-label="Courses navigation"><div class="topnav-left"><button class="topnav-brand" onclick="goPage('home')" aria-label="Refero home"><div class="logo-mark" aria-hidden="true"><svg viewBox="0 0 28 14" width="18" height="9" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zM21 7c0-2.8-2.2-5-5-5s-5 2.2-5 5 2.2 5 5 5 5-2.2 5-5z"/></svg></div><span>refero</span></button><div class="topnav-links"><button class="topnav-link" onclick="goPage('home')">Home</button><button class="topnav-link active" onclick="goPage('landing')">Course</button></div></div><div class="topnav-right"><button class="topnav-link" onclick="openSettings()" aria-label="Open settings">Settings</button><span class="avatar" aria-label="User profile: Gibran">G</span></div></nav>
   <div style="padding:36px">
     <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:24px"><h1 style="font-family:var(--font-display);font-size:1.8rem;font-weight:700">Introduction to Economics</h1><span style="font-size:.78rem;color:var(--text-muted)">1 course enrolled</span></div>
     <div class="courses-detail-card anim">
@@ -750,7 +749,7 @@ body.dark .mic-btn{background:rgba(96,165,250,.5);border-color:rgba(255,255,255,
 
 <!-- ═══ PLAYER ═══ -->
 <div class="page" id="pagePlayer">
-  <nav class="topnav" aria-label="Lesson navigation"><div class="topnav-left"><button class="topnav-brand" onclick="goPage('home')" aria-label="Refero home"><div class="logo-mark" aria-hidden="true"><svg viewBox="0 0 28 14" width="18" height="9" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zM21 7c0-2.8-2.2-5-5-5s-5 2.2-5 5 2.2 5 5 5 5-2.2 5-5z"/></svg></div><span>refero</span></button><div class="topnav-links"><button class="topnav-link" onclick="goPage('home')">Home</button><button class="topnav-link" onclick="goPage('landing')">Course</button><button class="topnav-link active">Lesson</button></div></div><div class="topnav-right"><button class="topnav-link" onclick="openSettings()" aria-label="Open settings">Settings</button><button class="avatar" onclick="openSettings()" aria-label="User menu">G</button></div></nav>
+  <nav class="topnav" aria-label="Lesson navigation"><div class="topnav-left"><button class="topnav-brand" onclick="goPage('home')" aria-label="Refero home"><div class="logo-mark" aria-hidden="true"><svg viewBox="0 0 28 14" width="18" height="9" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zM21 7c0-2.8-2.2-5-5-5s-5 2.2-5 5 2.2 5 5 5 5-2.2 5-5z"/></svg></div><span>refero</span></button><div class="topnav-links"><button class="topnav-link" onclick="goPage('home')">Home</button><button class="topnav-link" onclick="goPage('landing')">Course</button><button class="topnav-link active">Lesson</button></div></div><div class="topnav-right"><button class="topnav-link" onclick="openSettings()" aria-label="Open settings">Settings</button><span class="avatar" aria-label="User profile: Gibran">G</span></div></nav>
   <div class="comp-strip" role="region" aria-label="Lesson progress">
     <div class="cm"><span class="cm-label" id="cBarLabel">Completion</span><div class="cm-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-labelledby="cBarLabel" id="cBarTrack"><div class="cm-fill comp" id="cBar" style="width:0%"></div></div><span class="cm-val" id="cVal">0%</span></div>
     <div class="cm"><span class="cm-label" id="kBarLabel">Mastery</span><div class="cm-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-labelledby="kBarLabel" id="kBarTrack"><div class="cm-fill know" id="kBar" style="width:0%"></div></div><span class="cm-val" id="kVal">0%</span></div>
@@ -1293,42 +1292,58 @@ function setFontSize(btn,px){btn.parentElement.querySelectorAll('.a11y-opt').for
 function setFontWeight(btn,w){btn.parentElement.querySelectorAll('.a11y-opt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.body.classList.toggle('a11y-bold',w==='bold');haptic()}
 function setColorMode(btn,mode){btn.parentElement.querySelectorAll('.a11y-opt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.body.classList.remove('cb-deuteranopia','cb-protanopia','cb-tritanopia');if(mode!=='none')document.body.classList.add('cb-'+mode);haptic()}
 function setTheme(btn,theme){btn.parentElement.querySelectorAll('.a11y-opt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.body.classList.toggle('dark',theme==='dark');haptic()}
-function resetSettings(){document.documentElement.style.fontSize='';document.body.style.fontWeight='';document.body.classList.remove('cb-deuteranopia','cb-protanopia','cb-tritanopia','dark');document.querySelectorAll('.a11y-opt').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.a11y-group').forEach(g=>{const f=g.querySelector('.a11y-opt');if(f)f.classList.add('active')});haptic()}
+function resetSettings(){document.documentElement.style.fontSize='';document.body.classList.remove('cb-deuteranopia','cb-protanopia','cb-tritanopia','dark','a11y-bold');document.querySelectorAll('.a11y-opt').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.a11y-group').forEach(g=>{const f=g.querySelector('.a11y-opt');if(f)f.classList.add('active')});haptic()}
 
 /* ═══════════════════════════════════════════
-   CAPTIONS — fetches subtitles.vtt and parses into JS array.
-   Using fetch (not <track>) so it works on both file:// and http://.
+   CAPTIONS — loads subtitles.vtt and parses into JS array.
+   Uses fetch with XHR fallback so it works on both file:// and http://.
    ═══════════════════════════════════════════ */
-let captions = [];   // [{s, e, t}] populated after fetch
+let captions = [];   // [{s, e, t}] populated after load
 let captionsOn = true;
 let lastCueStart = -1;
 
 (function loadCaptions(){
-  fetch('subtitles.vtt')
-    .then(r => { if(!r.ok) throw 0; return r.text(); })
-    .then(text => {
-      const cues = [];
-      const blocks = text.trim().split(/\n\n+/);
-      for(const block of blocks){
-        const lines = block.trim().split('\n');
-        const ti = lines.findIndex(l => l.includes('-->'));
-        if(ti === -1) continue;
-        const toSec = str => {
-          const p = str.trim().split(':');
-          return +p[0]*3600 + +p[1]*60 + parseFloat(p[2]);
-        };
-        const [s, e] = lines[ti].split('-->').map(toSec);
-        const t = lines.slice(ti+1).join(' ').replace(/<[^>]+>/g,'').trim();
-        if(t) cues.push({s, e, t});
-      }
-      captions = cues;
-      // Refresh caption line if the video is already playing
-      lastCueStart = -1;
-    })
-    .catch(() => {
-      const line = document.getElementById('capLine');
-      if(line) line.innerHTML = '<span class="cap-empty">Could not load subtitles.vtt</span>';
-    });
+  function parseVTT(text){
+    const cues = [];
+    const blocks = text.trim().replace(/\r\n?/g,'\n').split(/\n\n+/);
+    for(const block of blocks){
+      const lines = block.trim().split('\n');
+      const ti = lines.findIndex(l => l.includes('-->'));
+      if(ti === -1) continue;
+      const toSec = str => {
+        const p = str.trim().split(':');
+        return +p[0]*3600 + +p[1]*60 + parseFloat(p[2]);
+      };
+      const [s, e] = lines[ti].split('-->').map(toSec);
+      const t = lines.slice(ti+1).join(' ').replace(/<[^>]+>/g,'').trim();
+      if(t) cues.push({s, e, t});
+    }
+    return cues;
+  }
+  function apply(text){
+    captions = parseVTT(text);
+    lastCueStart = -1;
+  }
+  function onFail(){
+    const line = document.getElementById('capLine');
+    if(line) line.innerHTML = '<span class="cap-empty">Could not load subtitles.vtt</span>';
+  }
+  function tryXHR(){
+    try{
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET','subtitles.vtt');
+      xhr.onload = function(){ xhr.responseText ? apply(xhr.responseText) : onFail(); };
+      xhr.onerror = onFail;
+      xhr.send();
+    }catch(e){ onFail(); }
+  }
+  // fetch works on http(s)://; XHR fallback covers file:// protocol
+  try{
+    fetch('subtitles.vtt')
+      .then(r => { if(!r.ok && r.status !== 0) throw 0; return r.text(); })
+      .then(apply)
+      .catch(tryXHR);
+  }catch(e){ tryXHR(); }
 })();
 
 function toggleCaptions(){
@@ -1396,12 +1411,6 @@ const checkpoints = [
     questions:[
       {q:"According to the law of supply, what happens when the price of a good increases?",opts:["Producers supply less","Producers supply more","Supply stays the same","Demand increases"],correct:1,yFb:"Correct — higher prices incentivize producers to supply more.",nFb:"The law of supply says producers are willing to sell more at higher prices."},
       {q:"Which of the following would shift the supply curve to the left?",opts:["Lower production costs","New technology","An increase in input costs","More firms entering the market"],correct:2,yFb:"Correct — higher input costs reduce supply at every price level.",nFb:"When production becomes more expensive, supply decreases (shifts left)."}
-    ]},
-  { time:180, segStart:101, topic:'Market Equilibrium',
-    remediation:'Review: equilibrium is where supply meets demand. At that price, quantity supplied equals quantity demanded — no surplus or shortage.',
-    questions:[
-      {q:"At the equilibrium price, which of the following is true?",opts:["There is a surplus","There is a shortage","Quantity supplied equals quantity demanded","Demand exceeds supply"],correct:2,yFb:"Correct — equilibrium is where supply meets demand with no surplus or shortage.",nFb:"At equilibrium, the quantity buyers want to buy exactly matches what sellers want to sell."},
-      {q:"If demand increases while supply stays the same, what happens to the equilibrium price?",opts:["Price falls","Price stays the same","Price rises","Price becomes zero"],correct:2,yFb:"Correct — increased demand with unchanged supply pushes the price up.",nFb:"More demand competing for the same supply drives the equilibrium price higher."}
     ]}
 ];
 
